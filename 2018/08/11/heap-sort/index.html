@@ -83,13 +83,13 @@
 
 
 
-<meta name="description" content="一些基础知识学习堆排序，总要了解堆的数据结构吧，了解堆又需要了解二叉树的基本知识，了解二叉树要先知道树是个什么东西吧……呃，还是太年轻。这里简单谈谈吧。 二叉树 提一下树)——树是一对多的数据结构，从一个根结点开始，生长出它的子结点，而每一个子结点又生长出各自的子结点，成为子树。如果某个结点不再生长出子结点了，它就成为叶子。   二叉树是每个节点最多有两个子树（）的树结构。通常子树被称作“左子树”">
+<meta name="description" content="一些基础知识学习堆排序，总要了解堆的数据结构吧，了解堆又需要了解二叉树的基本知识，了解二叉树要先知道树是个什么东西吧……呃，还是太年轻。这里简单谈谈吧。 二叉树 提一下树)——树是一对多的数据结构，从一个根结点开始，生长出它的子结点，而每一个子结点又生长出各自的子结点，成为子树。如果某个结点不再生长出子结点了，它就成为叶子。">
 <meta name="keywords" content="Java,树,排序,堆">
 <meta property="og:type" content="article">
 <meta property="og:title" content="堆排序">
 <meta property="og:url" content="https://www.mangococo.cn/2018/08/11/heap-sort/index.html">
 <meta property="og:site_name" content="芒枸公社">
-<meta property="og:description" content="一些基础知识学习堆排序，总要了解堆的数据结构吧，了解堆又需要了解二叉树的基本知识，了解二叉树要先知道树是个什么东西吧……呃，还是太年轻。这里简单谈谈吧。 二叉树 提一下树)——树是一对多的数据结构，从一个根结点开始，生长出它的子结点，而每一个子结点又生长出各自的子结点，成为子树。如果某个结点不再生长出子结点了，它就成为叶子。   二叉树是每个节点最多有两个子树（）的树结构。通常子树被称作“左子树”">
+<meta property="og:description" content="一些基础知识学习堆排序，总要了解堆的数据结构吧，了解堆又需要了解二叉树的基本知识，了解二叉树要先知道树是个什么东西吧……呃，还是太年轻。这里简单谈谈吧。 二叉树 提一下树)——树是一对多的数据结构，从一个根结点开始，生长出它的子结点，而每一个子结点又生长出各自的子结点，成为子树。如果某个结点不再生长出子结点了，它就成为叶子。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2018/05/02/5ae98bd2f1b7b.png">
 <meta property="og:image" content="https://i.loli.net/2018/05/03/5aea73f5ef3ef.jpg">
@@ -97,10 +97,10 @@
 <meta property="og:image" content="https://i.loli.net/2018/09/15/5b9be1386f3d7.jpg">
 <meta property="og:image" content="https://i.loli.net/2018/05/03/5aea78bb0e376.jpg">
 <meta property="og:image" content="https://i.loli.net/2018/05/18/5afe4dc00efdb.jpg">
-<meta property="og:updated_time" content="2018-11-22T23:51:58.000Z">
+<meta property="og:updated_time" content="2019-02-17T05:25:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="堆排序">
-<meta name="twitter:description" content="一些基础知识学习堆排序，总要了解堆的数据结构吧，了解堆又需要了解二叉树的基本知识，了解二叉树要先知道树是个什么东西吧……呃，还是太年轻。这里简单谈谈吧。 二叉树 提一下树)——树是一对多的数据结构，从一个根结点开始，生长出它的子结点，而每一个子结点又生长出各自的子结点，成为子树。如果某个结点不再生长出子结点了，它就成为叶子。   二叉树是每个节点最多有两个子树（）的树结构。通常子树被称作“左子树”">
+<meta name="twitter:description" content="一些基础知识学习堆排序，总要了解堆的数据结构吧，了解堆又需要了解二叉树的基本知识，了解二叉树要先知道树是个什么东西吧……呃，还是太年轻。这里简单谈谈吧。 二叉树 提一下树)——树是一对多的数据结构，从一个根结点开始，生长出它的子结点，而每一个子结点又生长出各自的子结点，成为子树。如果某个结点不再生长出子结点了，它就成为叶子。">
 <meta name="twitter:image" content="https://i.loli.net/2018/05/02/5ae98bd2f1b7b.png">
 
 
@@ -449,8 +449,10 @@
       
         <h2 id="一些基础知识"><a href="#一些基础知识" class="headerlink" title="一些基础知识"></a>一些基础知识</h2><p>学习堆排序，总要了解<em>堆</em>的数据结构吧，了解堆又需要了解<em>二叉树</em>的基本知识，了解二叉树要先知道树是个什么东西吧……<img src="https://i.loli.net/2018/05/02/5ae98bd2f1b7b.png" style="width:30px; display:inline !important">呃，还是太年轻。这里简单谈谈吧。</p>
 <h3 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h3><ol>
-<li><p>提一下<a href="https://zh.wikipedia.org/wiki/%E6%A0%91_(%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" target="_blank" rel="noopener"><strong>树</strong></a>)——<strong>树</strong>是一对多的数据结构，从一个根结点开始，生长出它的子结点，而每一个子结点又生长出各自的子结点，成为<strong>子树</strong>。如果某个结点不再生长出子结点了，它就成为<strong>叶子</strong>。 <img src="https://i.loli.net/2018/05/03/5aea73f5ef3ef.jpg" alt="一个普通的树结构"></p>
-</li>
+<li>提一下<a href="https://zh.wikipedia.org/wiki/%E6%A0%91_(%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" target="_blank" rel="noopener"><strong>树</strong></a>)——<strong>树</strong>是一对多的数据结构，从一个根结点开始，生长出它的子结点，而每一个子结点又生长出各自的子结点，成为<strong>子树</strong>。如果某个结点不再生长出子结点了，它就成为<strong>叶子</strong>。 <img src="https://i.loli.net/2018/05/03/5aea73f5ef3ef.jpg" alt="一个普通的树结构"></li>
+</ol>
+<a id="more"></a>
+<ol start="3">
 <li><p><a href="https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%8F%89%E6%A0%91" target="_blank" rel="noopener"><strong>二叉树</strong></a>是每个节点最多有两个子树（）的树结构。通常子树被称作“左子树”（left subtree）和“右子树”（right subtree），且次序不能颠倒。</p>
 <p><img src="https://i.loli.net/2018/05/03/5aea762ca1fee.jpg" alt="二叉树"></p>
 </li>

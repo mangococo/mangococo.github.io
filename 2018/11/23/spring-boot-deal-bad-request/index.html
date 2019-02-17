@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://i.loli.net/2018/11/21/5bf50160237ef.jpg">
 <meta property="og:image" content="https://i.loli.net/2018/11/21/5bf5107c1081d.jpg">
 <meta property="og:image" content="https://i.loli.net/2018/11/21/5bf5092e95ac0.jpg">
-<meta property="og:updated_time" content="2018-11-23T01:38:20.000Z">
+<meta property="og:updated_time" content="2019-02-17T05:39:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Boot 对错误请求的处理">
 <meta name="twitter:description" content="spring boot 的默认处理spring boot 未进入到Controller中的错误请求处理：spring boot 对于数据校验错误的请求处理：123请求： PUT &quot;/user/1&quot;测试数据：&amp;#123; &quot;id&quot;: 1, &quot;username&quot; : &quot;@jincoco&quot;, &quot;password&quot;: &quot;123456&quot;,  &quot;email&quot;: &quot;jincoco@email.com&quot;, &quot;bi">
@@ -451,6 +451,7 @@
         <h2 id="spring-boot-的默认处理"><a href="#spring-boot-的默认处理" class="headerlink" title="spring boot 的默认处理"></a>spring boot 的默认处理</h2><h3 id="spring-boot-未进入到Controller中的错误请求处理："><a href="#spring-boot-未进入到Controller中的错误请求处理：" class="headerlink" title="spring boot 未进入到Controller中的错误请求处理："></a>spring boot 未进入到<code>Controller</code>中的错误请求处理：</h3><p>spring boot 对于数据校验错误的请求处理：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">请求： PUT "/user/1"</span><br><span class="line">测试数据：&#123; "id": 1, "username" : "@jincoco", "password": "123456",  "email": "jincoco@email.com", "birthday": 1542700692000 &#125;</span><br><span class="line">校验约束：username 字段必须是数字、字母或_的组合</span><br></pre></td></tr></table></figure></p>
 <p><img src="https://i.loli.net/2018/11/21/5bf50a41c2e4b.jpg" alt=""></p>
 <p>由于测试错误为字段校验，需要上传数据，此处为<code>PUT</code>请求，尽模拟 APP 发送请求。</p>
+<a id="more"></a>
 <h3 id="spring-boot-进入到Controller中的错误请求处理："><a href="#spring-boot-进入到Controller中的错误请求处理：" class="headerlink" title="spring boot 进入到Controller中的错误请求处理："></a>spring boot 进入到<code>Controller</code>中的错误请求处理：</h3><p>spring boot 对于<code>REST</code>服务所抛出的异常处：理：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">请求： GET <span class="string">"/user/jin"</span></span><br><span class="line">抛出异常：UserNotFoundException(<span class="string">"User not found"</span>)</span><br></pre></td></tr></table></figure>
 <p>浏览器访问：<br><img src="https://i.loli.net/2018/11/21/5bf4f2b822b75.jpg" alt=""><br>模拟 APP 访问：<br><img src="https://i.loli.net/2018/11/21/5bf4f2e7d27dd.jpg" alt=""></p>

@@ -83,19 +83,19 @@
 
 
 
-<meta name="description" content="创建用户命令:1CREATE USER &apos;username&apos;@&apos;host&apos; IDENTIFIED BY &apos;password&apos;; 说明： username：创建的用户名 host：指定该用户登录的主机地址，如果是本地用户可用 localhost，如果想让该用户可以从任意远程主机登陆，可以使用通配符% password：该用户的登陆密码，密码可以为空（不需要密码登录 MySQL 服务器）  例子：12">
+<meta name="description" content="创建用户 命令:1CREATE USER &apos;username&apos;@&apos;host&apos; IDENTIFIED BY &apos;password&apos;;">
 <meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL 命令行进行用户基本操作">
 <meta property="og:url" content="https://www.mangococo.cn/2019/02/17/mysql-user-operations/index.html">
 <meta property="og:site_name" content="芒枸公社">
-<meta property="og:description" content="创建用户命令:1CREATE USER &apos;username&apos;@&apos;host&apos; IDENTIFIED BY &apos;password&apos;; 说明： username：创建的用户名 host：指定该用户登录的主机地址，如果是本地用户可用 localhost，如果想让该用户可以从任意远程主机登陆，可以使用通配符% password：该用户的登陆密码，密码可以为空（不需要密码登录 MySQL 服务器）  例子：12">
+<meta property="og:description" content="创建用户 命令:1CREATE USER &apos;username&apos;@&apos;host&apos; IDENTIFIED BY &apos;password&apos;;">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1g09956wakij30iy0d9gnu.jpg">
-<meta property="og:updated_time" content="2019-02-17T05:08:38.000Z">
+<meta property="og:updated_time" content="2019-02-17T05:34:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL 命令行进行用户基本操作">
-<meta name="twitter:description" content="创建用户命令:1CREATE USER &apos;username&apos;@&apos;host&apos; IDENTIFIED BY &apos;password&apos;; 说明： username：创建的用户名 host：指定该用户登录的主机地址，如果是本地用户可用 localhost，如果想让该用户可以从任意远程主机登陆，可以使用通配符% password：该用户的登陆密码，密码可以为空（不需要密码登录 MySQL 服务器）  例子：12">
+<meta name="twitter:description" content="创建用户 命令:1CREATE USER &apos;username&apos;@&apos;host&apos; IDENTIFIED BY &apos;password&apos;;">
 <meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1g09956wakij30iy0d9gnu.jpg">
 
 
@@ -418,23 +418,11 @@
 
       
       
-        <div class="post-gallery" itemscope="" itemtype="http://schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox" href="https://ws1.sinaimg.cn/large/006tKfTcly1g09956wakij30iy0d9gnu.jpg" rel="gallery_cjs8gbr9m000gz2jejroshww2" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="https://ws1.sinaimg.cn/large/006tKfTcly1g09956wakij30iy0d9gnu.jpg" itemprop="contentUrl">
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
 
       
-        <h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令:"></a>命令:</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">'username'</span>@<span class="string">'host'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'password'</span>;</span><br></pre></td></tr></table></figure>
+        <h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1g09956wakij30iy0d9gnu.jpg" alt="创建并授权一个用户"></p>
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令:"></a>命令:</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">'username'</span>@<span class="string">'host'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'password'</span>;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><ul>
 <li>username：创建的用户名</li>
 <li>host：指定该用户登录的主机地址，如果是本地用户可用 localhost，如果想让该用户可以<strong>从任意远程主机登陆</strong>，可以使用通配符<code>%</code></li>
