@@ -92,7 +92,7 @@
 <meta property="og:description" content="创建用户命令:1CREATE USER &apos;username&apos;@&apos;host&apos; IDENTIFIED BY &apos;password&apos;; 说明： username：创建的用户名 host：指定该用户登录的主机地址，如果是本地用户可用 localhost，如果想让该用户可以从任意远程主机登陆，可以使用通配符% password：该用户的登陆密码，密码可以为空（不需要密码登录 MySQL 服务器）  例子：12">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1g09956wakij30iy0d9gnu.jpg">
-<meta property="og:updated_time" content="2019-02-17T03:49:54.000Z">
+<meta property="og:updated_time" content="2019-02-17T05:08:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL 命令行进行用户基本操作">
 <meta name="twitter:description" content="创建用户命令:1CREATE USER &apos;username&apos;@&apos;host&apos; IDENTIFIED BY &apos;password&apos;; 说明： username：创建的用户名 host：指定该用户登录的主机地址，如果是本地用户可用 localhost，如果想让该用户可以从任意远程主机登陆，可以使用通配符% password：该用户的登陆密码，密码可以为空（不需要密码登录 MySQL 服务器）  例子：12">
@@ -418,6 +418,20 @@
 
       
       
+        <div class="post-gallery" itemscope="" itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox" href="https://ws1.sinaimg.cn/large/006tKfTcly1g09956wakij30iy0d9gnu.jpg" rel="gallery_cjs8gbr9m000gz2jejroshww2" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://ws1.sinaimg.cn/large/006tKfTcly1g09956wakij30iy0d9gnu.jpg" itemprop="contentUrl">
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
 
       
         <h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令:"></a>命令:</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">'username'</span>@<span class="string">'host'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'password'</span>;</span><br></pre></td></tr></table></figure>
@@ -442,7 +456,6 @@
 <li>tablename：表名，如果要授予该用户对所有数据库和表的相应操作权限则可用<code>*</code>表示，如<code>*.*</code></li>
 </ul>
 <h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT SELECT, INSERT ON test.user TO &apos;test&apos;@&apos;localhost&apos;;</span><br><span class="line">GRANT ALL ON *.* TO &apos;test&apos;@&apos;localhost&apos;;</span><br></pre></td></tr></table></figure>
-<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1g09956wakij30iy0d9gnu.jpg" alt=""></p>
 <h3 id="注意-1"><a href="#注意-1" class="headerlink" title="注意:"></a>注意:</h3><p>用以上命令授权的用户不能给其它用户授权，如果想让该用户可以授权，用以下命令:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT privileges ON databasename.tablename TO &apos;username&apos;@&apos;host&apos; WITH GRANT OPTION;</span><br></pre></td></tr></table></figure>
 <h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">全局管理权限：</span><br><span class="line">FILE:     在服务器上读写文件。</span><br><span class="line">PROCESS:  显示或杀死属于其它用户的服务线程。</span><br><span class="line">RELOAD:   重载访问控制表，刷新日志等。</span><br><span class="line">SHUTDOWN: 关闭MySQL服务。</span><br><span class="line"></span><br><span class="line">数据库/数据表/数据列权限：</span><br><span class="line">ALTER:    修改已存在的数据表(例如增加/删除列)和索引。</span><br><span class="line">CREATE:   建立新的数据库或数据表。</span><br><span class="line">DELETE:   删除表的记录。</span><br><span class="line">DROP:     删除数据表或数据库。</span><br><span class="line">INDEX:    建立或删除索引。</span><br><span class="line">INSERT:   增加表的记录。</span><br><span class="line">SELECT:   显示/搜索表的记录。</span><br><span class="line">UPDATE:   修改表中已存在的记录。</span><br><span class="line"></span><br><span class="line">特别的权限：</span><br><span class="line">ALL:      允许做任何事(和root一样)。</span><br><span class="line">USAGE:    只允许登录，其它什么也不允许做。</span><br></pre></td></tr></table></figure>
@@ -496,6 +509,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/17/how-to-display-article-images-in-the-homepage-summary/" rel="prev" title="hexo 博客中，next主题在首页摘要里显示文章图片">
+                hexo 博客中，next主题在首页摘要里显示文章图片 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -577,7 +594,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -599,7 +616,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
