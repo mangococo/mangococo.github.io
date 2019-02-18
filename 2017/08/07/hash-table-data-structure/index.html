@@ -92,7 +92,7 @@
 <meta property="og:description" content="散列表散列表（Hash table，也叫哈希表），是根据关键字值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。 散列表的思想其实很简单，就是把 Key（任意长度）通过一个固定的算法函数,即所谓的哈希函数转换成一个整型数字(固定长度)，然后就将该数字对数组长度进行取余，取余">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/1rUEkhv.jpg">
-<meta property="og:updated_time" content="2018-11-25T13:57:45.000Z">
+<meta property="og:updated_time" content="2019-02-18T02:10:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="散列表的学习笔记">
 <meta name="twitter:description" content="散列表散列表（Hash table，也叫哈希表），是根据关键字值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。 散列表的思想其实很简单，就是把 Key（任意长度）通过一个固定的算法函数,即所谓的哈希函数转换成一个整型数字(固定长度)，然后就将该数字对数组长度进行取余，取余">
@@ -435,6 +435,7 @@
 <p>散列表的思想其实很简单，就是把 Key（任意长度）通过一个固定的算法函数,即所谓的哈希函数转换成一个整型数字(固定长度)，然后就将该数字对数组长度进行取余，取余结果就当作数组的下标，将value存储在该下标的数组空间里。</p>
 <p>而当使用哈希表进行查询的时候，就是再次使用哈希函数将key转换为对应的数组下标，并定位到该空间获取value，如此一来，就可以充分利用到数组的定位性能进行数据定位。</p>
 <h2 id="散列算法。"><a href="#散列算法。" class="headerlink" title="散列算法。"></a>散列算法。</h2><p>根据 key（数据特征） 计算出对应数据的存储位置的算法叫做散列算法（<code>position=hash(key);</code>，又称哈希算法。</p>
+<a id="more"></a>
 <p>散列算法需要满足一下条件：</p>
 <ul>
 <li>对输入值进行运算后，应得到固定长度的计算结果；</li>
@@ -543,8 +544,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/07/analysis-of-HashMap-and-HashTable-based-on-JDK1-7/" rel="prev" title="基于 JDK1.7 分析 `HashMap` 与 `HashTable` 源码实现">
-                基于 JDK1.7 分析 `HashMap` 与 `HashTable` 源码实现 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/07/analysis-of-HashMap-and-HashTable-based-on-JDK1-7/" rel="prev" title="基于 JDK1.7 分析 HashMap 与 HashTable 源码实现">
+                基于 JDK1.7 分析 HashMap 与 HashTable 源码实现 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

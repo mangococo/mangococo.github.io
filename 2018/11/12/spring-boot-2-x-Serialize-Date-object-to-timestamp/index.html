@@ -93,7 +93,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2018/11/12/5be972c435ac7.jpg">
 <meta property="og:image" content="https://i.loli.net/2018/11/12/5be97317c5f16.jpg">
-<meta property="og:updated_time" content="2018-11-23T00:04:15.000Z">
+<meta property="og:updated_time" content="2019-02-18T02:06:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring boot 2.x不再默认将 java.util.Date 序列化为 timestamp（时间戳）">
 <meta name="twitter:description" content="在当下的前后端分离的开发环境下，对于传输时间数据的格式众说纷纭，但我仍然认为传递时间戳timestamp更合理，这样后端程序勿需关注前端时间的表现形式，更能应对一对多（同一后端代码，拥有多个前端）的需求。 在spring boot 1时，被@ResponseBody修饰的返回值中如果存在java.util.Date类型，jackson会默认被序列化为timestamp（一个数字串）的形式。 123">
@@ -447,6 +447,7 @@
 <p>在<code>spring boot 1</code>时，被<code>@ResponseBody</code>修饰的返回值中如果存在<code>java.util.Date</code>类型，<code>jackson</code>会默认被序列化为<code>timestamp</code>（一个数字串）的形式。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Model <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Model(<span class="number">1</span>, <span class="keyword">new</span> Date());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>以上述代码为例，在 <code>spring boot 2</code>后，不再默认序列化，而是格式化为下图格式：</p>
+<a id="more"></a>
 <p><img src="https://i.loli.net/2018/11/12/5be972c435ac7.jpg" alt=""></p>
 <p>如果需要序列化为时间戳，在<code>application.yaml</code>配置文件中添加时间格式化配置即可。</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  jackson:</span></span><br><span class="line"><span class="attr">    serialization:</span></span><br><span class="line"><span class="attr">      WRITE_DATES_AS_TIMESTAMPS:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>

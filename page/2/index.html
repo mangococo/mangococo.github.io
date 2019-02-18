@@ -442,20 +442,17 @@
 
       
         
-          
-            <p>在当下的前后端分离的开发环境下，对于传输时间数据的格式众说纷纭，但我仍然认为传递时间戳<code>timestamp</code>更合理，这样后端程序勿需关注前端时间的表现形式，更能应对一对多（同一后端代码，拥有多个前端）的需求。</p>
+          <p>在当下的前后端分离的开发环境下，对于传输时间数据的格式众说纷纭，但我仍然认为传递时间戳<code>timestamp</code>更合理，这样后端程序勿需关注前端时间的表现形式，更能应对一对多（同一后端代码，拥有多个前端）的需求。</p>
 <p>在<code>spring boot 1</code>时，被<code>@ResponseBody</code>修饰的返回值中如果存在<code>java.util.Date</code>类型，<code>jackson</code>会默认被序列化为<code>timestamp</code>（一个数字串）的形式。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Model <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Model(<span class="number">1</span>, <span class="keyword">new</span> Date());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>以上述代码为例，在 <code>spring boot 2</code>后，不再默认序列化，而是格式化为下图格式：</p>
-<p><img src="https://i.loli.net/2018/11/12/5be972c435ac7.jpg" alt=""></p>
-<p>如果需要序列化为时间戳，在<code>application.yaml</code>配置文件中添加时间格式化配置即可。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  jackson:</span></span><br><span class="line"><span class="attr">    serialization:</span></span><br><span class="line"><span class="attr">      WRITE_DATES_AS_TIMESTAMPS:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>如果是<code>application.properties</code>文件，添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.jackson.serialization.WRITE_DATES_AS_TIMESTAMPS=true</span><br></pre></td></tr></table></figure>
-<p>这样一来，前端得到的数据又可以是<code>timestamp</code>了。</p>
-<p><img src="https://i.loli.net/2018/11/12/5be97317c5f16.jpg" alt=""></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/12/spring-boot-2-x-Serialize-Date-object-to-timestamp/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -640,40 +637,17 @@
 
       
         
-          
-            <p>第一步，移除默认<code>open-jdk</code></p>
+          <p>第一步，移除默认<code>open-jdk</code></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get autoremove openjdk-11-jre-headless</span><br></pre></td></tr></table></figure>
 <h2 id="apt-get安装"><a href="#apt-get安装" class="headerlink" title="apt-get安装"></a><code>apt-get</code>安装</h2><p>1、安装依赖包：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-software-properties</span><br></pre></td></tr></table></figure>
-<p>2、添加仓库源：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:webupd8team/java</span><br></pre></td></tr></table></figure></p>
-<p>3、更新软件包列表：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
-<p>4、安装 java JDK：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install oracle-java8-installer</span><br></pre></td></tr></table></figure>
-<p>5、查看 java 版本，看看是否安装成功：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-<h2 id="手动下载压缩包安装-oracle-Java-JDK"><a href="#手动下载压缩包安装-oracle-Java-JDK" class="headerlink" title="手动下载压缩包安装 oracle Java JDK"></a>手动下载压缩包安装 oracle Java JDK</h2><p>1、前往 oracle Java <a href="https://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="noopener">官网下载</a> JDK</p>
-<p>2、解压缩到指定目录（以 jdk-8u191-linux-x64.tar.gz 为例）</p>
-<ul>
-<li>创建目录:</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /usr/lib/jvm</span><br></pre></td></tr></table></figure>
-<ul>
-<li>解压缩到该目录:</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxvf jdk-8u191-linux-x64.tar.gz -C /usr/lib/jvm</span><br></pre></td></tr></table></figure>
-<p>3、修改环境变量:　　</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi ~/.bashrc</span><br></pre></td></tr></table></figure>
-<p>在文件末尾追加下面内容：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>set oracle jdk environment</span><br><span class="line">export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_191  ## 这里要注意目录要换成自己解压的jdk 目录</span><br><span class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib</span><br><span class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure>
-<p>使环境变量马上生效：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
-<p>4、系统注册此 jdk</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.8.0_191/bin/java 300</span><br></pre></td></tr></table></figure>
-<p>5、查看 java 版本，看看是否安装成功：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/05/install-oracle-jdk-on-ubuntu-server/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1226,80 +1200,15 @@
 
       
         
-          
-            <h2 id="使用授权方法进行授权配置"><a href="#使用授权方法进行授权配置" class="headerlink" title="使用授权方法进行授权配置"></a>使用授权方法进行授权配置</h2><p>每一个 Spring Security 控制授权表达式（以下简称为表达式）实际上都在 API 中对应一个授权方法，该方法是请求的 URL 权限配置时的处理方法。例如：</p>
+          <h2 id="使用授权方法进行授权配置"><a href="#使用授权方法进行授权配置" class="headerlink" title="使用授权方法进行授权配置"></a>使用授权方法进行授权配置</h2><p>每一个 Spring Security 控制授权表达式（以下简称为表达式）实际上都在 API 中对应一个授权方法，该方法是请求的 URL 权限配置时的处理方法。例如：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    http.authorizeRequests()</span><br><span class="line">        .antMatchers(HttpMethod.DELETE, <span class="string">"/user/*"</span>).hasRole(<span class="string">"ADMIN"</span>)</span><br><span class="line">        .antMatchers(<span class="string">"/index"</span>).permitAll()</span><br><span class="line">        .antMatchers(<span class="string">"/pay"</span>).hasAnyRole(<span class="string">"WE_CHAT_PAY"</span>, <span class="string">"ALI_PAY"</span>)</span><br><span class="line">        .antMatchers(<span class="string">"/debug"</span>).hasIpAddress(<span class="string">"192.168.1.0/24"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="使用授权表达式给多权限要求的请求授权"><a href="#使用授权表达式给多权限要求的请求授权" class="headerlink" title="使用授权表达式给多权限要求的请求授权"></a>使用授权表达式给多权限要求的请求授权</h3><p>那么，何时需要用到表达式进行授权处理呢？一个安全应用的权限要求往往是复杂多样的，比如，项目的调试请求希望访问者既要拥有管理员权限又必须是通过公司内部局域网内部访问。而这样的需求下，仅仅通过Security API 提供的方法是无法满足的，因为这些授权方法是无法连续调用的。</p>
-<p>此时就可以使用授权表达式解决：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    http.authorizeRequests()</span><br><span class="line">        .antMatchers(<span class="string">"/debug"</span>)</span><br><span class="line">            .access(<span class="string">"hasRole('ADMIN') and hasIpAddress('192.168.1.0/24')"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="授权表达式举例说明"><a href="#授权表达式举例说明" class="headerlink" title="授权表达式举例说明"></a>授权表达式举例说明</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">表达式</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><code>permitAll</code></td>
-<td style="text-align:center">永远返回 true</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>denyAll</code></td>
-<td style="text-align:center">永远返回 false</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>anonyous</code></td>
-<td style="text-align:center">当前用户若是匿名用户返回 true</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>rememberMe</code></td>
-<td style="text-align:center">当前用户若是 rememberMe 用户返回 true</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>authenticated</code></td>
-<td style="text-align:center">当前用户若不是匿名（已认证）用户返回 true</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>fullAuthenticated</code></td>
-<td style="text-align:center">当前用户若既不是匿名用户又不是 rememberMe 用户时返回 true</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>hasRole(role)</code></td>
-<td style="text-align:center">当前用户权限集合中若拥有指定的 role 角色权限（匹配时会在你所指定的权限前加’ROLE_’，即判断是否有“ROLE_role”权限）时返回 true</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>hasAnyRole(role1, role2, ...)</code></td>
-<td style="text-align:center">当前用户权限集合中若拥有任意一个角色权限时返回 true</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>hasAuthority(authority)</code></td>
-<td style="text-align:center">当前用户权限集合中若具有 authority 权限（匹配是否有“authority”权限）时返回 true</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>hasAnyAuthority(authority)</code></td>
-<td style="text-align:center">当前用户权限集合中若拥有任意一个权限时返回 true</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>hasIpAddress(&quot;192.168.1.0/24&quot;)</code></td>
-<td style="text-align:center">发送请求的IP匹配时fanhui true</td>
-</tr>
-</tbody>
-</table>
-<h2 id="使用自定义授权表达式进行访问控制"><a href="#使用自定义授权表达式进行访问控制" class="headerlink" title="使用自定义授权表达式进行访问控制"></a>使用自定义授权表达式进行访问控制</h2><p>或许你会认为上述方式已能满足绝大多数应用安全授权管理。但事实上的企业级应用的授权往往是基于数据库数据动态变化的，若是使用上述方式进行字符串拼接，不仅对于开发者极不友好（每一次人人员变动都意味着需要改代码，显然不合理），而且应用的性能也会随之降低。那么，如何解决呢？</p>
-<p>基本思想是自定义授权管理模块（从数据库中插查询用户角色权限及可以访问的资源），并利用自定义授权表达式进行授权管理。此处的数据结构基于RBAC数据模型构建</p>
-<h3 id="基于角色的访问控制-RBAC-数据模型（Role-Based-Access-Control）"><a href="#基于角色的访问控制-RBAC-数据模型（Role-Based-Access-Control）" class="headerlink" title="基于角色的访问控制 RBAC 数据模型（Role-Based Access Control）"></a>基于角色的访问控制 RBAC 数据模型（Role-Based Access Control）</h3><p>通用的 RBAC 数据模型， 一般需要五张表（三张实体表，两张关系表）。三张实体表包括用户表、角色表、资源表。两张关系表包括。其之间关系如下图：</p>
-<p><img src="https://i.loli.net/2018/08/01/5b61a3994aa1e.jpg" alt="RBAC数据模型"></p>
-<h4 id="用户表"><a href="#用户表" class="headerlink" title="用户表"></a>用户表</h4><p>任何一个系统都必须要有用户表，当公司发生人员变动时，由业务人员（如人力资源）对该数据表进行增删记录。</p>
-<h4 id="角色表"><a href="#角色表" class="headerlink" title="角色表"></a>角色表</h4><p>公司有哪些身份的人，例如总裁、副总裁、部门经理等，由业务人员根据公司的具体情况对该表数据进行操作。</p>
-<h4 id="资源表"><a href="#资源表" class="headerlink" title="资源表"></a>资源表</h4><p>存储需要进行权限控制的资源，由于我们进行控制授权时实际上是基于 URL 的，但业务人员并非按 URL 组织数据条目（事实上大多数业务人员也不懂这些），而是以视图界面的形式进行操作。所以在这张表中存储的是呈现给业务人员的菜单、按钮及其所进行权限控制的 URL 。</p>
-<h4 id="用户—角色关系表"><a href="#用户—角色关系表" class="headerlink" title="用户—角色关系表"></a>用户—角色关系表</h4><p>用户表与角色表（用户 id 与角色id ）之间是一个多对多的关系。一个用户可以是多个角色（一个用户既可以是部门经理又可以是某个管理员），而一个角色往往对应多个用户。</p>
-<h4 id="角色—资源关系表"><a href="#角色—资源关系表" class="headerlink" title="角色—资源关系表"></a>角色—资源关系表</h4><p>角色表与资源表（）也是一个多对多的关系。一种角色可以访问多个资源（按钮或菜单等），一个资源也可以被多个角色访问。</p>
-<h3 id="自定义授权表达式"><a href="#自定义授权表达式" class="headerlink" title="自定义授权表达式"></a>自定义授权表达式</h3><p>spring security 支持自定义表达式来完成这项工作，下面是一个简单的例子：</p>
-<p>首先定义自己的授权模块并声明为 Spring 的 Bean<br> 如下，此处方法名可以任意，但参数必须提供<code>HttpServletRequest</code>及<code>Authentication</code>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RbacService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> AntPathMatcher antPathMatcher = <span class="keyword">new</span> AntPathMatcher();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasPermission</span><span class="params">(HttpServletRequest request, Authentication auth)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">boolean</span>[] hasPermission = &#123;<span class="keyword">false</span>&#125;;</span><br><span class="line">            Object principal = auth.getPrincipal();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 只有对非匿名用户才有必要进行权限控制</span></span><br><span class="line">            <span class="keyword">if</span> (principal <span class="keyword">instanceof</span> UserDetails) &#123;</span><br><span class="line">                String username = (UserDetails) principal.getUsername();</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 根据username 查询用户所拥有权限的所有URL</span></span><br><span class="line">                Set&lt;String&gt; urls = getUrlsByUsername(username);</span><br><span class="line">                <span class="comment">// 遍历判断用户所访问的请求是否在其权限允许的范围内</span></span><br><span class="line">                urls.forEach(url -&gt; &#123;</span><br><span class="line">                    <span class="keyword">if</span> (antPathMatcher.match(url, request.getRequestURI())) &#123;</span><br><span class="line">                        hasPermission[<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> hasPermission[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后在 Spring Security 安全配置中使用自定义授权表达式添加自己的授权逻辑：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    http.authorizeRequests()</span><br><span class="line">        .anyRequest()</span><br><span class="line">            .access(<span class="string">"@rbacService.hasPermission(request, authentication)"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Okay,这样一来，就可以将自己的授权逻辑与 Spring Security 模块衔接起来了。</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/26/spring-security-rbac-authentication/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1650,8 +1559,7 @@
 
       
         
-          
-            <p>相信 “迭代” 对于 Java 程序员来说并不陌生（当然，其他语言的程序员也是如此），在处理数据时，不可避免地会存在对数据的大量遍历操作。对于我自己而言，学习使用Java语言两年时间，对于“迭代”的概念还停留在 <code>for:each</code>,<code>for:i</code>的遍历阶段。今天用到了JDK 提供的迭代接口进行 Java 集合的迭代，便决定作以笔记，留作以后学习。</p>
+          <p>相信 “迭代” 对于 Java 程序员来说并不陌生（当然，其他语言的程序员也是如此），在处理数据时，不可避免地会存在对数据的大量遍历操作。对于我自己而言，学习使用Java语言两年时间，对于“迭代”的概念还停留在 <code>for:each</code>,<code>for:i</code>的遍历阶段。今天用到了JDK 提供的迭代接口进行 Java 集合的迭代，便决定作以笔记，留作以后学习。</p>
 <h2 id="普通-Java-集合迭代（遍历）"><a href="#普通-Java-集合迭代（遍历）" class="headerlink" title="普通 Java 集合迭代（遍历）"></a>普通 Java 集合迭代（遍历）</h2><p>迭代可以简单理解为遍历，在没有 JDK 并未提供迭代器时，我们对于数据的遍历处理如下：</p>
 <ul>
 <li>对于数组的遍历处理：</li>
@@ -1661,34 +1569,13 @@
 <li>对 ArrayList 的遍历处理：</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Bean&gt; beanArrayList = <span class="keyword">new</span> ArrayList&lt;Bean&gt;();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; beanArrayList.size(); i++) &#123;</span><br><span class="line">    beanArrayList.add(<span class="keyword">new</span> Bean());</span><br><span class="line">    <span class="comment">// todo something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看出，如果我们想对一个空的 Java 集合添加数据，那我们就必须知道该集合内部的数据结构（即，以数组和 ArrayList 为例，添加时的操作应该是<code>beans[i] = new Bean();</code>还是<code>beanArrayList.add(new Bean());</code>），这样就导致了访问逻辑与集合的结构本身紧密耦合（即，每一种不同的数据集合对应了不同的便利方法），这会使得代码无法复用。</p>
-<p>而 <code>Iterator</code> 可以轻松的解决上述问题.</p>
-<h2 id="通过java-util-Iterator迭代器"><a href="#通过java-util-Iterator迭代器" class="headerlink" title="通过java.util.Iterator迭代器"></a>通过<code>java.util.Iterator</code>迭代器</h2><p>看一下官方未出的解释：</p>
-<blockquote>
-<p><code>public interface Iterator&lt;E&gt;</code><br>An iterator over a collection. <code>Iterator</code>takes the place of <code>Enumeration</code><br>in the Java Collections Framework. Iterators differ from enumerations in two ways:</p>
-</blockquote>
-<ul>
-<li>Iterators allow the caller to remove elements from the underlying collection during the iteration with well-defined semantics.</li>
-<li>Method names have been improved.This interface is a member of the <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/collections/index.html" target="_blank" rel="noopener">Java Collections Framework</a></li>
-</ul>
-<p>就是说，<code>Iterator</code>是一个对 collection 集合进行迭代的迭代器（接口）。<code>Iterator</code>迭代器取代了 Java Collections Framework 中的 <code>Enumeration</code>。该接口是 Java Collections Framework 的成员。迭代器与枚举有两点不同：</p>
-<ul>
-<li>迭代器允许调用者利用定义良好的语义在迭代期间从迭代器所指向的 collection 移除元素。</li>
-<li>方法名称得到了改进。</li>
-</ul>
-<p>这也就意味着，<code>Iterator</code> 使用相同的访问逻辑完成集合的遍历,使得我们在访问集合元素时，无需关心不同的集合内部结构。从而降低访问逻辑与集合本身的耦合度。</p>
-<p><code>Iterator</code>接口源代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> java.util;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.function.Consumer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">// 返回迭代是否有更多的元素。</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 返回迭代器刚越过的元素的引用</span></span><br><span class="line">    <span class="function">E <span class="title">next</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 从底层集合中移除此迭代器返回的最后一个元素（可选操作）</span></span><br><span class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException(<span class="string">"remove"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 对每个剩余的元素执行给定的操作，直到处理完所有元素或操作抛出异常</span></span><br><span class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">forEachRemaining</span><span class="params">(Consumer&lt;? <span class="keyword">super</span> E&gt; action)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(action);</span><br><span class="line">        <span class="keyword">while</span> (hasNext())</span><br><span class="line">            action.accept(next());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="如何使用-Iterator-对数据遍历"><a href="#如何使用-Iterator-对数据遍历" class="headerlink" title="如何使用 Iterator 对数据遍历"></a>如何使用 Iterator 对数据遍历</h3><p>在使用中，我们既可以借助<code>hasNext()</code>及<code>next()</code>方法，对已知集合结构的集合对象完成简单的迭代（类似于之前的方案），就像这样：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Iterator&lt;Bean&gt; beanIterator = beanArrayList.iterator();</span><br><span class="line"><span class="keyword">while</span> (beanIterator.hasNext()) &#123;</span><br><span class="line">    Bean bean = beanIterator.next();</span><br><span class="line">    <span class="comment">// todo something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>更新于2017.12.03</p>
-<h3 id="更符合封装思想的迭代手段"><a href="#更符合封装思想的迭代手段" class="headerlink" title="更符合封装思想的迭代手段"></a>更符合封装思想的迭代手段</h3><p>仅仅这样不是与之前的方案没什么区别了吗？当然，它能做的还可以更多。做到真正不去关心集合内部结构的迭代手段，下述代码是对一个集合对象的迭代：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isExist</span><span class="params">(Collection&lt;Bean&gt; beans, Bean bean)</span> </span>&#123;</span><br><span class="line">    Iterator&lt;Bean&gt; iterator = beans.iterator();</span><br><span class="line">    System.out.println(beans.getClass().getSimpleName() + <span class="string">":"</span>);</span><br><span class="line">    <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (iterator.next().equals(bean)) &#123;</span><br><span class="line">            System.out.println(<span class="string">"集合中已存在 Bean["</span> + bean + <span class="string">"]"</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Test：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Bean bean0 = <span class="keyword">new</span> Bean().setId(<span class="string">"01"</span>);</span><br><span class="line">    Bean bean1 = <span class="keyword">new</span> Bean().setId(<span class="string">"02"</span>);</span><br><span class="line"></span><br><span class="line">    ArrayList&lt;Bean&gt; beanArrayList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    Queue&lt;Bean&gt; beanQueue = <span class="keyword">new</span> LinkedBlockingQueue&lt;&gt;();</span><br><span class="line">    HashMap&lt;Bean, Bean&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    beanArrayList.add(bean0);</span><br><span class="line">    beanArrayList.add(bean1);</span><br><span class="line"></span><br><span class="line">    map.put(bean0, bean0);</span><br><span class="line">    map.put(bean1, bean1);</span><br><span class="line"></span><br><span class="line">    beanQueue.add(bean0);</span><br><span class="line">    beanQueue.add(bean1);</span><br><span class="line"></span><br><span class="line">    isExist(map.keySet(), bean0);</span><br><span class="line">    isExist(beanArrayList, bean1);</span><br><span class="line">    isExist(beanQueue, bean1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>输出结果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">KeySet:</span><br><span class="line">	集合中已存在 Bean[Bean&#123;id=<span class="string">'01'</span>, password=<span class="string">'null'</span>&#125;]</span><br><span class="line">ArrayList:</span><br><span class="line">	集合中已存在 Bean[Bean&#123;id=<span class="string">'02'</span>, password=<span class="string">'null'</span>&#125;]</span><br><span class="line">LinkedBlockingQueue:</span><br><span class="line">	集合中已存在 Bean[Bean&#123;id=<span class="string">'02'</span>, password=<span class="string">'null'</span>&#125;]</span><br></pre></td></tr></table></figure></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>所有Collection框架中的j几乎所有的集合类（或接口）（如ArrayList、Set、Queue等）都实现了（接口也声明了<code>iterator()</code>方法）自己的内部的迭代器，但无疑都是<code>Iterator</code>的实现。</p>
-<p>不过据数组由于其本身的实现方案与 “编译处理和 JVM 的<code>native()</code>方法有关，不能直接获取到其本身的迭代器，但可通过集合框架将数组转换为集合类型就好了。</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/07/java-iterator-study/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
