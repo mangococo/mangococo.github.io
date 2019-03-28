@@ -83,22 +83,24 @@
 
 
 
-<meta name="description" content="Spring Security 中提供了默认的用户登录页面，但在实际工程项目中默认的登录页自然是无法满足项目需求的，这里不讨论如何自定义登录页，仅针对自定义登录页面后获取用户验证错误信息说说自己的方案。  如果你清楚Spring Security默认的错误处理，那么你可以跳过接下来的章节。  Spring security 中用户验证错误信息去了哪里？Spring Security 中主要通过 A">
+<meta name="description" content="Spring Security 中提供了默认的用户登录页面，但在实际项目中默认的登录页自然是无法满足需求的，这里不讨论如何自定义登录页，仅针对自定义表单登录页面后如何获取用户验证错误信息，并如上图一样为用户呈现提示说说自己的方案。">
 <meta name="keywords" content="Java,spring,spring mvc,RESTful APl,spring security">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring Security 自定义登录页面如何获取用户验证错误信息">
 <meta property="og:url" content="https://www.mangococo.cn/2019/03/28/spring-security-login-error-process/index.html">
 <meta property="og:site_name" content="芒枸公社">
-<meta property="og:description" content="Spring Security 中提供了默认的用户登录页面，但在实际工程项目中默认的登录页自然是无法满足项目需求的，这里不讨论如何自定义登录页，仅针对自定义登录页面后获取用户验证错误信息说说自己的方案。  如果你清楚Spring Security默认的错误处理，那么你可以跳过接下来的章节。  Spring security 中用户验证错误信息去了哪里？Spring Security 中主要通过 A">
+<meta property="og:description" content="Spring Security 中提供了默认的用户登录页面，但在实际项目中默认的登录页自然是无法满足需求的，这里不讨论如何自定义登录页，仅针对自定义表单登录页面后如何获取用户验证错误信息，并如上图一样为用户呈现提示说说自己的方案。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1g1il31gnu6j30me0hgwhg.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1g1ikf70veoj30rw0isgp8.jpg">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcly1g1ikmu5kxuj30ki0fiq68.jpg">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1g1iksum7zrj30lr0fdtbb.jpg">
-<meta property="og:updated_time" content="2019-03-28T08:24:18.000Z">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1g1il31gnu6j30me0hgwhg.jpg">
+<meta property="og:updated_time" content="2019-03-28T08:31:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Security 自定义登录页面如何获取用户验证错误信息">
-<meta name="twitter:description" content="Spring Security 中提供了默认的用户登录页面，但在实际工程项目中默认的登录页自然是无法满足项目需求的，这里不讨论如何自定义登录页，仅针对自定义登录页面后获取用户验证错误信息说说自己的方案。  如果你清楚Spring Security默认的错误处理，那么你可以跳过接下来的章节。  Spring security 中用户验证错误信息去了哪里？Spring Security 中主要通过 A">
-<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1g1ikf70veoj30rw0isgp8.jpg">
+<meta name="twitter:description" content="Spring Security 中提供了默认的用户登录页面，但在实际项目中默认的登录页自然是无法满足需求的，这里不讨论如何自定义登录页，仅针对自定义表单登录页面后如何获取用户验证错误信息，并如上图一样为用户呈现提示说说自己的方案。">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1g1il31gnu6j30me0hgwhg.jpg">
 
 
 
@@ -444,7 +446,9 @@
       
 
       
-        <p>Spring Security 中提供了默认的用户登录页面，但在实际工程项目中默认的登录页自然是无法满足项目需求的，这里不讨论如何自定义登录页，仅针对自定义登录页面后获取用户验证错误信息说说自己的方案。</p>
+        <p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g1il31gnu6j30me0hgwhg.jpg" alt=""></p>
+<p>Spring Security 中提供了默认的用户登录页面，但在实际项目中默认的登录页自然是无法满足需求的，这里不讨论如何自定义登录页，仅针对自定义表单登录页面后如何获取用户验证错误信息，并如上图一样为用户呈现提示说说自己的方案。</p>
+<a id="more"></a>
 <blockquote>
 <p>如果你清楚Spring Security默认的错误处理，那么你可以跳过接下来的章节。</p>
 </blockquote>
@@ -468,7 +472,7 @@
 <h3 id="模拟非-login-html-发起请求"><a href="#模拟非-login-html-发起请求" class="headerlink" title="模拟非 login.html 发起请求"></a>模拟非 login.html 发起请求</h3><p>Code：<br><img src="https://ws2.sinaimg.cn/large/006tKfTcly1g1ikmu5kxuj30ki0fiq68.jpg" alt=""></p>
 <p>结果：</p>
 <p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1g1iksum7zrj30lr0fdtbb.jpg" alt=""></p>
-<h3 id="自定义登录页测试"><a href="#自定义登录页测试" class="headerlink" title="自定义登录页测试"></a>自定义登录页测试</h3><p><a href="https://ws4.sinaimg.cn/large/006tKfTcly1g1il31gnu6j30me0hgwhg.jpg" target="_blank" rel="noopener">https://ws4.sinaimg.cn/large/006tKfTcly1g1il31gnu6j30me0hgwhg.jpg</a></p>
+<h3 id="自定义登录页测试"><a href="#自定义登录页测试" class="headerlink" title="自定义登录页测试"></a>自定义登录页测试</h3><p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g1il31gnu6j30me0hgwhg.jpg" alt=""></p>
 
       
     </div>
