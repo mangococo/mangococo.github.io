@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="数据结构,哈希,">
+  <meta name="keywords" content="Java,spring,spring boot,Maven,">
 
 
 
@@ -83,20 +83,27 @@
 
 
 
-<meta name="description" content="散列表散列表（Hash table，也叫哈希表），是根据关键字值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。 散列表的思想其实很简单，就是把 Key（任意长度）通过一个固定的算法函数,即所谓的哈希函数转换成一个整型数字(固定长度)，然后就将该数字对数组长度进行取余，取余">
-<meta name="keywords" content="数据结构,哈希">
+<meta name="description" content="今天在干活时发现了 Maven 在对多模块打包时的一个小坑，做个记录，也希望能帮助到遇到相同问题的朋友。 我的项目结构如下：  project 为maven父项目，app、authorize、core为期子模块，project的pom.xml声明如下：  整个项目基于Spring Boot构建，使用Maven管理依赖、编译、打包。">
+<meta name="keywords" content="Java,spring,spring boot,Maven">
 <meta property="og:type" content="article">
-<meta property="og:title" content="散列表的学习笔记">
-<meta property="og:url" content="https://www.mangococo.cn/2017/08/07/hash-table-data-structure/index.html">
+<meta property="og:title" content="Spring Boot 多模块开发时，Maven编译可运行 jar 包">
+<meta property="og:url" content="https://www.mangococo.cn/2019/04/16/idea-moudles-maven-build/index.html">
 <meta property="og:site_name" content="芒枸公社">
-<meta property="og:description" content="散列表散列表（Hash table，也叫哈希表），是根据关键字值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。 散列表的思想其实很简单，就是把 Key（任意长度）通过一个固定的算法函数,即所谓的哈希函数转换成一个整型数字(固定长度)，然后就将该数字对数组长度进行取余，取余">
+<meta property="og:description" content="今天在干活时发现了 Maven 在对多模块打包时的一个小坑，做个记录，也希望能帮助到遇到相同问题的朋友。 我的项目结构如下：  project 为maven父项目，app、authorize、core为期子模块，project的pom.xml声明如下：  整个项目基于Spring Boot构建，使用Maven管理依赖、编译、打包。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/1rUEkhv.jpg">
-<meta property="og:updated_time" content="2019-02-18T02:10:33.000Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1g24n9oskzaj30eh07twei.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1g24ng9kgrcj30mk0gwq7v.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1g24nsy7kk9j30mb0fegp0.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1g24odqg5dxj311y0lc478.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1g24o23zzswj30rs0gk78y.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1g24ofz3tmbj30qx0i4dmb.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1g24oo9zl5ej30rs0gk0x1.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1g24or51fxlj30qx0i4n3p.jpg">
+<meta property="og:updated_time" content="2019-04-16T11:26:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="散列表的学习笔记">
-<meta name="twitter:description" content="散列表散列表（Hash table，也叫哈希表），是根据关键字值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。 散列表的思想其实很简单，就是把 Key（任意长度）通过一个固定的算法函数,即所谓的哈希函数转换成一个整型数字(固定长度)，然后就将该数字对数组长度进行取余，取余">
-<meta name="twitter:image" content="https://i.imgur.com/1rUEkhv.jpg">
+<meta name="twitter:title" content="Spring Boot 多模块开发时，Maven编译可运行 jar 包">
+<meta name="twitter:description" content="今天在干活时发现了 Maven 在对多模块打包时的一个小坑，做个记录，也希望能帮助到遇到相同问题的朋友。 我的项目结构如下：  project 为maven父项目，app、authorize、core为期子模块，project的pom.xml声明如下：  整个项目基于Spring Boot构建，使用Maven管理依赖、编译、打包。">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1g24n9oskzaj30eh07twei.jpg">
 
 
 
@@ -126,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="https://www.mangococo.cn/2017/08/07/hash-table-data-structure/">
+  <link rel="canonical" href="https://www.mangococo.cn/2019/04/16/idea-moudles-maven-build/">
 
 
 
 
 
-  <title>散列表的学习笔记 | 芒枸公社</title>
+  <title>Spring Boot 多模块开发时，Maven编译可运行 jar 包 | 芒枸公社</title>
   
 
 
@@ -310,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.mangococo.cn/2017/08/07/hash-table-data-structure/">
+    <link itemprop="mainEntityOfPage" href="https://www.mangococo.cn/2019/04/16/idea-moudles-maven-build/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="我是才子">
@@ -327,7 +334,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">散列表的学习笔记</h1>
+          <h1 class="post-title" itemprop="name headline">Spring Boot 多模块开发时，Maven编译可运行 jar 包</h1>
         
 
         <div class="post-meta">
@@ -339,8 +346,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-07T14:39:43+08:00">
-                2017-08-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-16T14:59:05+08:00">
+                2019-04-16
               </time>
             
 
@@ -373,8 +380,19 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/数据结构与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构与算法</span>
+                  <a href="/categories/Code/后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/后端开发/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
                   </a>
                 </span>
 
@@ -391,8 +409,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/07/hash-table-data-structure/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2017/08/07/hash-table-data-structure/" itemprop="commentCount"></span>
+                <a href="/2019/04/16/idea-moudles-maven-build/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/16/idea-moudles-maven-build/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -400,7 +418,7 @@
 
           
           
-             <span id="/2017/08/07/hash-table-data-structure/" class="leancloud_visitors" data-flag-title="散列表的学习笔记">
+             <span id="/2019/04/16/idea-moudles-maven-build/" class="leancloud_visitors" data-flag-title="Spring Boot 多模块开发时，Maven编译可运行 jar 包">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -431,81 +449,31 @@
       
 
       
-        <h1 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h1><p>散列表（Hash table，也叫哈希表），是根据关键字值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。</p>
-<p>散列表的思想其实很简单，就是把 Key（任意长度）通过一个固定的算法函数,即所谓的哈希函数转换成一个整型数字(固定长度)，然后就将该数字对数组长度进行取余，取余结果就当作数组的下标，将value存储在该下标的数组空间里。</p>
-<p>而当使用哈希表进行查询的时候，就是再次使用哈希函数将key转换为对应的数组下标，并定位到该空间获取value，如此一来，就可以充分利用到数组的定位性能进行数据定位。</p>
-<h2 id="散列算法。"><a href="#散列算法。" class="headerlink" title="散列算法。"></a>散列算法。</h2><p>根据 key（数据特征） 计算出对应数据的存储位置的算法叫做散列算法（<code>position=hash(key);</code>，又称哈希算法。</p>
+        <p>今天在干活时发现了 Maven 在对多模块打包时的一个小坑，做个记录，也希望能帮助到遇到相同问题的朋友。</p>
+<p>我的项目结构如下：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1g24n9oskzaj30eh07twei.jpg" alt=""></p>
+<p>project 为maven父项目，app、authorize、core为期子模块，project的pom.xml声明如下：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1g24ng9kgrcj30mk0gwq7v.jpg" alt=""></p>
+<p>整个项目基于Spring Boot构建，使用Maven管理依赖、编译、打包。</p>
 <a id="more"></a>
-<p>散列算法需要满足一下条件：</p>
-<ul>
-<li>对输入值进行运算后，应得到固定长度的计算结果；</li>
-<li>对于不同的输入值，得到的结构可能相同。</li>
-<li>散列函数的输出值尽量接近均匀分布。</li>
-<li>x的微小变化可以使f(x)发生非常大的变化，即所谓“雪崩效应”(Avalanche effect)。</li>
-</ul>
-<p>例如：</p>
-<blockquote>
-<p>$  f(x) = x  \% 16 $<br>$ f(x) = (x^2 + 10) * x $<br>$ f(x) = (x | 0×0000FFFF) XOR (x &gt;&gt; 16) $</p>
-</blockquote>
-<h3 id="除法散列法"><a href="#除法散列法" class="headerlink" title="除法散列法"></a>除法散列法</h3><p>公式:</p>
-<blockquote>
-<p><code>f(x) = x % N</code>（N为常数，不大于数组的长度）</p>
-</blockquote>
-<p>取关键字被某个不大于散列表表长 L 的数 N 除后所得的余数为散列地址。对 N 的选择很重要，一般取”素数”或 L，若 N 选的不好，容易产生同义词</p>
-<h3 id="平方散列法"><a href="#平方散列法" class="headerlink" title="平方散列法"></a>平方散列法</h3><p>公式： <code>index = (value * value) &gt;&gt; 28</code>  （右移，除以2^28。记法：左移变大，是乘。右移变小，是除。）</p>
-<p>当无法确定关键字中哪几位分布较均匀时，可以先求出关键字的平方值，然后按需要取平方值的中间几位作为哈希地址。这是因为：平方后中间几位和关键字中每一位都相关，故不同关键字会以较高的概率产生不同的哈希地址。</p>
-<p>如果数值分配比较均匀的话这种方法能得到不错的结果，但我上面画的那个图的各个元素的值算出来的index都是0——非常失败。还有个问题，value如果很大，value * value不会溢出吗？答案是会的，但我们这个乘法不关心溢出，因为我们根本不是为了获取相乘结果，而是为了获取下标。</p>
-<h3 id="斐波那契散列法"><a href="#斐波那契散列法" class="headerlink" title="斐波那契散列法"></a>斐波那契散列法</h3><p>公式:</p>
-<blockquote>
-<p><code>index = (value * num) &gt;&gt; 28</code>（此处的num为特定的乘数，其余与平方散列法相同）</p>
-</blockquote>
-<p>在上述“平方散列法”中，需要以 value 的值作为乘数，有没有可能用特定的数值作为乘数。</p>
-<ul>
-<li>对于16位整数而言，这个乘数是<code>40503</code>。</li>
-<li>对于32位整数而言，这个乘数是<code>2654435769</code>。</li>
-<li>对于64位整数而言，这个乘数是<code>11400714819323198485</code>.</li>
-</ul>
-<h2 id="哈希冲突"><a href="#哈希冲突" class="headerlink" title="哈希冲突"></a>哈希冲突</h2><p>哈希重复，也就是两个不同输入通过哈希函数运算所得到的地址值相同的情况。哈希冲突是无法避免的，因此，哈希算法的选择直接决定了哈希冲突发送的概率；同时必须要对哈希冲突进行处理。</p>
-<h3 id="开放寻址法"><a href="#开放寻址法" class="headerlink" title="开放寻址法"></a>开放寻址法</h3><blockquote>
-<p>开放寻址法，即把所有的元素都存放在散列表中，也就是每个表项包含动态集合的一个元素（元素可以为NULL）。</p>
-</blockquote>
-<ol>
-<li>在开放寻址法中，当要插入一个元素时，可以连续地检查散列表的各个项（连续检查是可以通过不同的算法获得偏移位），直到找到一个空槽来放置这个元素为止。</li>
-<li>当查找一个元素时，要检查所有的表项，直到找到所需的元素，或者最终发现元素不在表中。</li>
-<li>在开放寻址法中，对散列表元素的删除操作执行起来比较困难。当我们从槽 i 中删除关键字时，不能仅将此位置元素置空。因为这样做的话，会导致在无法判断此位置是否有元素。应该用个特殊的值表示该元素已经删除。</li>
-</ol>
-<p>公式:</p>
-<blockquote>
-<p><code>Hi=(H(key) + di) % m</code> , [ i = 1, 2，…，k * (k &lt;= m-1) ]</p>
-</blockquote>
-<p>其中<code>H(key)</code>为散列函数，<code>m</code>为散列表长；<code>di</code>为增量序列，可有下列三种取法:</p>
-<h3 id="线性探测再散列"><a href="#线性探测再散列" class="headerlink" title="线性探测再散列"></a>线性探测再散列</h3><p>公式：<code>di = 1,2,3，…，m-1</code><br>线性再散列法是最简单的处理冲突的方案。插入数据时，当发生冲突，算法会自动从该空间的位置向后遍历哈希表，直到找到下一个空间为空的位置。（这样会导致相同hash的数据重复存放，且会占用其他hash所对应的空间。）查询数据时，算法会先定位到该hash所对应的位置空间上，若是没找到匹配数据则会从该位置继续向后遍历哈希表，直到找到：</p>
-<ul>
-<li>对应的数据，返回对应数据。</li>
-<li>空的空间，并返回所对应的值为空。</li>
-<li>遍历结束也未出现上两种情况，返回未找到，并表示该哈希表是满的。</li>
-</ul>
-<h4 id="线性探测法处理冲突的但存在下列缺点："><a href="#线性探测法处理冲突的但存在下列缺点：" class="headerlink" title="线性探测法处理冲突的但存在下列缺点："></a>线性探测法处理冲突的但存在下列缺点：</h4><ul>
-<li>处理溢出需另编程序。一般可另外设立一个溢出表，专门用来存放上述哈希表中放不下的记录。此溢出表最简单的结构是顺序表，查找方法可用顺序查找。</li>
-<li>按上述算法建立起来的哈希表，删除工作非常困难。如果将此元素删除，查找的时会发现空槽，则会认为要找的元素不存在。只能标上已被删除的标记，否则，将会影响以后的查找。</li>
-<li>线性探测法很容易产生堆聚现象。所谓堆聚现象，就是存入哈希表的记录在表中连成一片。按照线性探测法处理冲突，如果生成哈希地址的连续序列愈长 ( 即不同关键字值的哈希地址相邻在一起愈长 ) ，则当新的记录加入该表时，与这个序列发生冲突的可能性愈大。因此，哈希地址的较长连续序列比较短连续序列生长得快，这就意味着，一旦出现堆聚 ( 伴随着冲突 ) ，就将引起进一步的堆聚。</li>
-</ul>
-<h3 id="二次探测再散列"><a href="#二次探测再散列" class="headerlink" title="二次探测再散列"></a>二次探测再散列</h3><p>公式：<code>di = 1^2, -1^2, 2^2, -2^2, 3^2，…，±(k)^2, (k &lt;= m/2)</code></p>
-<h3 id="伪随机探测再散列"><a href="#伪随机探测再散列" class="headerlink" title="伪随机探测再散列"></a>伪随机探测再散列</h3><p>公式：<code>di = pseudo-random</code></p>
-<p>随机探测的基本思想是：将线性探测的步长从常数改为随机数，即令： hash ＝ (hash ＋ RN) % m ，其中 RN 是一个随机数。在实际程序中应预先用随机数发生器产生一个随机序列，将此序列作为依次探测的步长。这样就能使不同的关键字具有不同的探测次序，从而可以避 免或减少堆聚。基于与线性探测法相同的理由，在线性补偿探测法和随机探测法中，删除一个记录后也要打上删除标记。</p>
-<h3 id="拉链法"><a href="#拉链法" class="headerlink" title="拉链法"></a>拉链法</h3><p>最常见的实现方案如下，可称之为“数组链表法”。数组的特点是：寻址容易，插入和删除困难；而链表的特点是：寻址困难，插入和删除容易。结合两者的特性的数据结构便是寻址，插入删除代价都相对均衡的哈希表。其中大致结构如下：</p>
-<p><img src="https://i.imgur.com/1rUEkhv.jpg" alt="Entry数组实现哈希表"></p>
-<p>从上图的结构中可以看出，左边的连续存储结构为数组，而数组的每个空间都存放一个指向链表头部的指针。需要按元素的特征将数据分配到不同的链表中去。而将元素特征转换为数组下标的方法就是“散列法”。（例如 Java中的 HashTable、HashMap 都是使用“拉链法”实现）。</p>
-<h4 id="拉链法的优点："><a href="#拉链法的优点：" class="headerlink" title="拉链法的优点："></a>拉链法的优点：</h4><ul>
-<li>拉链法处理冲突简单，且无堆积现象，即非同义词决不会发生冲突，因此平均查找长度较短；</li>
-<li>由于拉链法中各链表上的结点空间是动态申请的，故它更适合于造表前无法确定表长的情况；</li>
-<li>开放定址法为减少冲突，要求装填因子α较小，故当结点规模较大时会浪费很多空间。而拉链法中可取α≥1，且结点较大时，拉链法中增加的指针域可忽略不计，因此节省空间；</li>
-<li>在用拉链法构造的散列表中，删除结点的操作易于实现。只要简单地删去链表上相应的结点即可。</li>
-</ul>
-<h4 id="拉链法的缺点"><a href="#拉链法的缺点" class="headerlink" title="拉链法的缺点"></a>拉链法的缺点</h4><p>指针需要额外的空间，故当结点规模较小时，开放定址法较为节省空间，而若将节省的指针空间用来扩大散列表的规模，可使装填因子变小，这又减少了开放定址法中的冲突，从而提高平均查找速度。</p>
-<blockquote>
-<p>本篇文章是写于 2017.08.07 的学习笔记，那时正是酷暑，稍稍坐一会就汗流浃背。别家空调压缩机排出的热气通过门下的缝隙灌入我的房间，使我的室温甚至高于窗外艳阳下的温度，挥汗写下这篇学习笔记。正因如此，我也知道肯定错误百出，望大家多加指正。</p>
-</blockquote>
+<p>app 模块为项目入口，包含Spring Boot Application。maven 编译插件配置如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">finalName</span>&gt;</span>test<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>我在 core 模块中添加了一项功能类（演示类为Test）：</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1g24nsy7kk9j30mb0fegp0.jpg" alt=""></p>
+<p>当我使用IDEA直接运行 app 模块中的Spring Boot应用时，新添加的代码得以运行：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1g24odqg5dxj311y0lc478.jpg" alt=""></p>
+<p>可是，当我使用maven编译工具将项目打包成可运行 jar 时，,而且整个编译打包过程并未出错，却发现我方才新添加的代码并未运行：</p>
+<p>打包：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn install</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1g24o23zzswj30rs0gk78y.jpg" alt=""></p>
+<p>Terminal运行：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar test.jar</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1g24ofz3tmbj30qx0i4dmb.jpg" alt=""></p>
+<h2 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h2><p>由于不懂maven的编译原理，所以只能以最笨的办法：不断测试不同的可能性，先Debug，排除代码错误的可能性。再修改 pom 插件、依赖等等。经过一个多小时的探索，终于：</p>
+<p>我在使用maven打包时，选择的时 app 模块下的 <code>install</code> 。这种情况下，maven在打包时虽会对 项目下其他模块（core）进行编译、检测，但并不会对这些模块执行 <code>install</code> 命令。也就导致，除 app 模块以外的其他模块都处于之前的状态，app 模块打包时所copy的依赖文件也是之前的。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>其实解决方案很简单，那就是对整个项目执行编译打包即可。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1g24oo9zl5ej30rs0gk0x1.jpg" alt=""></p>
+<p>再在Terminals运行得到的结果：</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1g24or51fxlj30qx0i4n3p.jpg" alt=""></p>
+<h2 id="一些废话"><a href="#一些废话" class="headerlink" title="一些废话"></a>一些废话</h2><p>这篇文章有点虎头蛇尾的感觉，但往往就是这样，最令人煎熬的无疑是找Bug的过程，往往最后问题很简单，解决方案更简单。希望看官有帮助。</p>
 
       
     </div>
@@ -523,9 +491,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数据结构/" rel="tag"><i class="fa fa-tag"></i> 数据结构</a>
+            <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
           
-            <a href="/tags/哈希/" rel="tag"><i class="fa fa-tag"></i> 哈希</a>
+            <a href="/tags/spring/" rel="tag"><i class="fa fa-tag"></i> spring</a>
+          
+            <a href="/tags/spring-boot/" rel="tag"><i class="fa fa-tag"></i> spring boot</a>
+          
+            <a href="/tags/Maven/" rel="tag"><i class="fa fa-tag"></i> Maven</a>
           
         </div>
       
@@ -538,15 +510,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/03/28/spring-security-login-error-process/" rel="next" title="Spring Security 自定义登录页面如何获取用户验证错误信息">
+                <i class="fa fa-chevron-left"></i> Spring Security 自定义登录页面如何获取用户验证错误信息
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/07/analysis-of-HashMap-and-HashTable-based-on-JDK1-7/" rel="prev" title="基于 JDK1.7 分析 HashMap 与 HashTable 源码实现">
-                基于 JDK1.7 分析 HashMap 与 HashTable 源码实现 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -711,7 +683,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#散列表"><span class="nav-number">1.</span> <span class="nav-text">散列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#散列算法。"><span class="nav-number">1.1.</span> <span class="nav-text">散列算法。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#除法散列法"><span class="nav-number">1.1.1.</span> <span class="nav-text">除法散列法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平方散列法"><span class="nav-number">1.1.2.</span> <span class="nav-text">平方散列法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#斐波那契散列法"><span class="nav-number">1.1.3.</span> <span class="nav-text">斐波那契散列法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希冲突"><span class="nav-number">1.2.</span> <span class="nav-text">哈希冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开放寻址法"><span class="nav-number">1.2.1.</span> <span class="nav-text">开放寻址法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性探测再散列"><span class="nav-number">1.2.2.</span> <span class="nav-text">线性探测再散列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线性探测法处理冲突的但存在下列缺点："><span class="nav-number">1.2.2.1.</span> <span class="nav-text">线性探测法处理冲突的但存在下列缺点：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二次探测再散列"><span class="nav-number">1.2.3.</span> <span class="nav-text">二次探测再散列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伪随机探测再散列"><span class="nav-number">1.2.4.</span> <span class="nav-text">伪随机探测再散列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拉链法"><span class="nav-number">1.2.5.</span> <span class="nav-text">拉链法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#拉链法的优点："><span class="nav-number">1.2.5.1.</span> <span class="nav-text">拉链法的优点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拉链法的缺点"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">拉链法的缺点</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发现问题"><span class="nav-number">2.</span> <span class="nav-text">发现问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">3.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些废话"><span class="nav-number">4.</span> <span class="nav-text">一些废话</span></a></li></ol></div>
             
 
           </div>
