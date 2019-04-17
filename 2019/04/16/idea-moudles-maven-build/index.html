@@ -83,15 +83,15 @@
 
 
 
-<meta name="description" content="今天在干活时发现了 Maven 在对多模块打包时的一个小坑，做个记录，也希望能帮助到遇到相同问题的朋友。 我的项目结构如下：  project 为maven父项目，app、authorize、core为期子模块，project的pom.xml声明如下：  整个项目基于Spring Boot构建，使用Maven管理依赖、编译、打包。">
+<meta name="description" content="今天在干活时发现了 Maven 在对多模块打包时的一个小坑，做个记录，也希望能帮助到遇到相同问题的朋友。 我的项目结构如下：  project 为maven父项目，app、authorize、core为期子模块，app与authorize模块分别依赖core模块，app同时依赖authorize模块。project的pom.xml声明如下：  整个项目基于Spring Boot构建，使用Maven">
 <meta name="keywords" content="Java,spring,Maven,spring boot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring Boot 多模块开发时，Maven编译可运行 jar 包">
 <meta property="og:url" content="https://www.mangococo.cn/2019/04/16/idea-moudles-maven-build/index.html">
 <meta property="og:site_name" content="芒枸公社">
-<meta property="og:description" content="今天在干活时发现了 Maven 在对多模块打包时的一个小坑，做个记录，也希望能帮助到遇到相同问题的朋友。 我的项目结构如下：  project 为maven父项目，app、authorize、core为期子模块，project的pom.xml声明如下：  整个项目基于Spring Boot构建，使用Maven管理依赖、编译、打包。">
+<meta property="og:description" content="今天在干活时发现了 Maven 在对多模块打包时的一个小坑，做个记录，也希望能帮助到遇到相同问题的朋友。 我的项目结构如下：  project 为maven父项目，app、authorize、core为期子模块，app与authorize模块分别依赖core模块，app同时依赖authorize模块。project的pom.xml声明如下：  整个项目基于Spring Boot构建，使用Maven">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1g24n9oskzaj30eh07twei.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1g25k4b8r4tj30ei09gwem.jpg">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1g24ng9kgrcj30mk0gwq7v.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1g24nsy7kk9j30mb0fegp0.jpg">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1g24odqg5dxj311y0lc478.jpg">
@@ -99,11 +99,11 @@
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1g24ofz3tmbj30qx0i4dmb.jpg">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1g24oo9zl5ej30rs0gk0x1.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1g24or51fxlj30qx0i4n3p.jpg">
-<meta property="og:updated_time" content="2019-04-16T14:04:08.000Z">
+<meta property="og:updated_time" content="2019-04-17T05:20:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Boot 多模块开发时，Maven编译可运行 jar 包">
-<meta name="twitter:description" content="今天在干活时发现了 Maven 在对多模块打包时的一个小坑，做个记录，也希望能帮助到遇到相同问题的朋友。 我的项目结构如下：  project 为maven父项目，app、authorize、core为期子模块，project的pom.xml声明如下：  整个项目基于Spring Boot构建，使用Maven管理依赖、编译、打包。">
-<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1g24n9oskzaj30eh07twei.jpg">
+<meta name="twitter:description" content="今天在干活时发现了 Maven 在对多模块打包时的一个小坑，做个记录，也希望能帮助到遇到相同问题的朋友。 我的项目结构如下：  project 为maven父项目，app、authorize、core为期子模块，app与authorize模块分别依赖core模块，app同时依赖authorize模块。project的pom.xml声明如下：  整个项目基于Spring Boot构建，使用Maven">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1g25k4b8r4tj30ei09gwem.jpg">
 
 
 
@@ -451,8 +451,8 @@
       
         <p>今天在干活时发现了 Maven 在对多模块打包时的一个小坑，做个记录，也希望能帮助到遇到相同问题的朋友。</p>
 <p>我的项目结构如下：</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1g24n9oskzaj30eh07twei.jpg" alt=""></p>
-<p>project 为maven父项目，app、authorize、core为期子模块，project的pom.xml声明如下：</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1g25k4b8r4tj30ei09gwem.jpg" alt=""></p>
+<p>project 为maven父项目，app、authorize、core为期子模块，app与authorize模块分别依赖core模块，app同时依赖authorize模块。project的pom.xml声明如下：</p>
 <p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1g24ng9kgrcj30mk0gwq7v.jpg" alt=""></p>
 <p>整个项目基于Spring Boot构建，使用Maven管理依赖、编译、打包。</p>
 <a id="more"></a>

@@ -444,8 +444,8 @@
         
           <p>今天在干活时发现了 Maven 在对多模块打包时的一个小坑，做个记录，也希望能帮助到遇到相同问题的朋友。</p>
 <p>我的项目结构如下：</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1g24n9oskzaj30eh07twei.jpg" alt=""></p>
-<p>project 为maven父项目，app、authorize、core为期子模块，project的pom.xml声明如下：</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1g25k4b8r4tj30ei09gwem.jpg" alt=""></p>
+<p>project 为maven父项目，app、authorize、core为期子模块，app与authorize模块分别依赖core模块，app同时依赖authorize模块。project的pom.xml声明如下：</p>
 <p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1g24ng9kgrcj30mk0gwq7v.jpg" alt=""></p>
 <p>整个项目基于Spring Boot构建，使用Maven管理依赖、编译、打包。</p>
           <!--noindex-->
