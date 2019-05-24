@@ -91,19 +91,19 @@
 <meta property="og:site_name" content="芒枸公社">
 <meta property="og:description" content="今天在干活时发现了 Maven 在对多模块打包时的一个小坑，做个记录，也希望能帮助到遇到相同问题的朋友。 我的项目结构如下：  project 为maven父项目，app、authorize、core为期子模块，app与authorize模块分别依赖core模块，app同时依赖authorize模块。project的pom.xml声明如下：  整个项目基于Spring Boot构建，使用Maven">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://wx4.sinaimg.cn/large/006tNc79ly1g25k4b8r4tj30ei09gwem.jpg">
-<meta property="og:image" content="https://wx3.sinaimg.cn/large/006tNc79ly1g24ng9kgrcj30mk0gwq7v.jpg">
-<meta property="og:image" content="https://wx4.sinaimg.cn/large/006tNc79ly1g24nsy7kk9j30mb0fegp0.jpg">
-<meta property="og:image" content="https://wx3.sinaimg.cn/large/006tNc79ly1g24odqg5dxj311y0lc478.jpg">
-<meta property="og:image" content="https://wx2.sinaimg.cn/large/006tNc79ly1g24o23zzswj30rs0gk78y.jpg">
-<meta property="og:image" content="https://wx4.sinaimg.cn/large/006tNc79ly1g24ofz3tmbj30qx0i4dmb.jpg">
-<meta property="og:image" content="https://wx2.sinaimg.cn/large/006tNc79ly1g24oo9zl5ej30rs0gk0x1.jpg">
-<meta property="og:image" content="https://wx4.sinaimg.cn/large/006tNc79ly1g24or51fxlj30qx0i4n3p.jpg">
-<meta property="og:updated_time" content="2019-05-24T12:27:41.000Z">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/006tNc79ly1g25k4b8r4tj30ei09gwem.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/006tNc79ly1g24ng9kgrcj30mk0gwq7v.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/006tNc79ly1g24nsy7kk9j30mb0fegp0.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/006tNc79ly1g24odqg5dxj311y0lc478.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/006tNc79ly1g24o23zzswj30rs0gk78y.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/006tNc79ly1g24ofz3tmbj30qx0i4dmb.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/006tNc79ly1g24oo9zl5ej30rs0gk0x1.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/006tNc79ly1g24or51fxlj30qx0i4n3p.jpg">
+<meta property="og:updated_time" content="2019-05-24T12:31:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Boot 多模块开发时，Maven编译可运行 jar 包">
 <meta name="twitter:description" content="今天在干活时发现了 Maven 在对多模块打包时的一个小坑，做个记录，也希望能帮助到遇到相同问题的朋友。 我的项目结构如下：  project 为maven父项目，app、authorize、core为期子模块，app与authorize模块分别依赖core模块，app同时依赖authorize模块。project的pom.xml声明如下：  整个项目基于Spring Boot构建，使用Maven">
-<meta name="twitter:image" content="https://wx4.sinaimg.cn/large/006tNc79ly1g25k4b8r4tj30ei09gwem.jpg">
+<meta name="twitter:image" content="https://wx1.sinaimg.cn/large/006tNc79ly1g25k4b8r4tj30ei09gwem.jpg">
 
 
 
@@ -451,28 +451,28 @@
       
         <p>今天在干活时发现了 Maven 在对多模块打包时的一个小坑，做个记录，也希望能帮助到遇到相同问题的朋友。</p>
 <p>我的项目结构如下：</p>
-<p><img src="https://wx4.sinaimg.cn/large/006tNc79ly1g25k4b8r4tj30ei09gwem.jpg" alt=""></p>
+<p><img src="https://wx1.sinaimg.cn/large/006tNc79ly1g25k4b8r4tj30ei09gwem.jpg" alt=""></p>
 <p>project 为maven父项目，app、authorize、core为期子模块，app与authorize模块分别依赖core模块，app同时依赖authorize模块。project的pom.xml声明如下：</p>
-<p><img src="https://wx3.sinaimg.cn/large/006tNc79ly1g24ng9kgrcj30mk0gwq7v.jpg" alt=""></p>
+<p><img src="https://wx1.sinaimg.cn/large/006tNc79ly1g24ng9kgrcj30mk0gwq7v.jpg" alt=""></p>
 <p>整个项目基于Spring Boot构建，使用Maven管理依赖、编译、打包。</p>
 <a id="more"></a>
 <p>app 模块为项目入口，包含Spring Boot Application。maven 编译插件配置如下：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">finalName</span>&gt;</span>test<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>我在 core 模块中添加了一项功能类（演示类为Test）：</p>
-<p><img src="https://wx4.sinaimg.cn/large/006tNc79ly1g24nsy7kk9j30mb0fegp0.jpg" alt=""></p>
+<p><img src="https://wx1.sinaimg.cn/large/006tNc79ly1g24nsy7kk9j30mb0fegp0.jpg" alt=""></p>
 <p>当我使用IDEA直接运行 app 模块中的Spring Boot应用时，新添加的代码得以运行：</p>
-<p><img src="https://wx3.sinaimg.cn/large/006tNc79ly1g24odqg5dxj311y0lc478.jpg" alt=""></p>
+<p><img src="https://wx1.sinaimg.cn/large/006tNc79ly1g24odqg5dxj311y0lc478.jpg" alt=""></p>
 <p>可是，当我使用maven编译工具将项目打包成可运行 jar 时，而且整个编译打包过程并未出错，却发现我方才新添加的代码并未执行：</p>
 <p>打包：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn install</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://wx2.sinaimg.cn/large/006tNc79ly1g24o23zzswj30rs0gk78y.jpg" alt=""></p>
+<p><img src="https://wx1.sinaimg.cn/large/006tNc79ly1g24o23zzswj30rs0gk78y.jpg" alt=""></p>
 <p>Terminal运行：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar test.jar</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://wx4.sinaimg.cn/large/006tNc79ly1g24ofz3tmbj30qx0i4dmb.jpg" alt=""></p>
+<p><img src="https://wx1.sinaimg.cn/large/006tNc79ly1g24ofz3tmbj30qx0i4dmb.jpg" alt=""></p>
 <h2 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h2><p>由于不懂maven的编译原理，所以只能以最笨的办法：不断测试不同的可能性，先Debug，排除代码错误的可能性。再修改 pom 插件、依赖等等。经过一个多小时的探索，终于：</p>
 <p>我在使用maven打包时，选择的是 app 模块下的 <code>install</code> 。这种情况下，maven在打包时虽会对 项目下其他模块（core）进行编译、检测，但并不会对这些模块执行 <code>install</code> 命令。也就导致，除 app 模块以外的其他模块都处于之前的状态，app 模块打包时所copy的依赖文件也是之前的。</p>
 <h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>其实解决方案很简单，那就是对整个项目执行编译打包即可。</p>
-<p><img src="https://wx2.sinaimg.cn/large/006tNc79ly1g24oo9zl5ej30rs0gk0x1.jpg" alt=""></p>
+<p><img src="https://wx1.sinaimg.cn/large/006tNc79ly1g24oo9zl5ej30rs0gk0x1.jpg" alt=""></p>
 <p>再在Terminals运行得到的结果：</p>
-<p><img src="https://wx4.sinaimg.cn/large/006tNc79ly1g24or51fxlj30qx0i4n3p.jpg" alt=""></p>
+<p><img src="https://wx1.sinaimg.cn/large/006tNc79ly1g24or51fxlj30qx0i4n3p.jpg" alt=""></p>
 <h2 id="一些废话"><a href="#一些废话" class="headerlink" title="一些废话"></a>一些废话</h2><p>这篇文章有点虎头蛇尾的感觉，但往往就是这样，最令人煎熬的无疑是找Bug的过程，往往最后问题很简单，解决方案更简单。希望看官有帮助。</p>
 
       
