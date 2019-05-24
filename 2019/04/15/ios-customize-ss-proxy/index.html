@@ -91,17 +91,17 @@
 <meta property="og:site_name" content="芒枸公社">
 <meta property="og:description" content="说起科学上网，其实IOS上代理软件真的算得上是百花齐放，但同时也是良莠不齐。可能是由于IOS系统的的沙盒机制，我并未在App Store中看到像Android端Shadowsocks那样支持应用绕行模式的代理软件，最起码免费的代理软件中没有这样功能的。 但是，这种需求是的的确确存在的。我们不希望所有网络请求都经过代理转发，像国内的App、IOS系统的请求。其实，现大多代理App的自动代理规则已包含">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1g24r70omm8j31400u0769.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1g24qpbjleij31400u0gny.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1g24qoh7ky8j31400u078s.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1g24skayddcj31400u0wg2.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1g24rb1y3aoj31400u0wg2.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1g24r70omm8j31400u0769.jpg">
-<meta property="og:updated_time" content="2019-04-16T13:52:34.000Z">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/006tNc79ly1g24r70omm8j31400u0769.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/006tNc79ly1g24qpbjleij31400u0gny.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/006tNc79ly1g24qoh7ky8j31400u078s.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/006tNc79ly1g24skayddcj31400u0wg2.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/006tNc79ly1g24rb1y3aoj31400u0wg2.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/large/006tNc79ly1g24r70omm8j31400u0769.jpg">
+<meta property="og:updated_time" content="2019-05-24T12:33:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IOS 设置自定义 ss 代理">
 <meta name="twitter:description" content="说起科学上网，其实IOS上代理软件真的算得上是百花齐放，但同时也是良莠不齐。可能是由于IOS系统的的沙盒机制，我并未在App Store中看到像Android端Shadowsocks那样支持应用绕行模式的代理软件，最起码免费的代理软件中没有这样功能的。 但是，这种需求是的的确确存在的。我们不希望所有网络请求都经过代理转发，像国内的App、IOS系统的请求。其实，现大多代理App的自动代理规则已包含">
-<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1g24r70omm8j31400u0769.jpg">
+<meta name="twitter:image" content="https://wx1.sinaimg.cn/large/006tNc79ly1g24r70omm8j31400u0769.jpg">
 
 
 
@@ -440,9 +440,9 @@
 <p>但是，这种需求是的的确确存在的。我们不希望所有网络请求都经过代理转发，像国内的App、IOS系统的请求。其实，现大多代理App的自动代理规则已包含了高墙外绝大多数域名解析，但总是存在不在代理规则之内的，那这时要怎么做呢？或者你说那完全可以需要的时候打开代理，不需要的时候关闭即可。的确是一种解决方案，但如果能自动化，又何乐而不为呢？</p>
 <p>那么，如何通过一款免费的ss代理软件，模拟实现Android端Shadowsocks若星模式的功能呢？</p>
 <h2 id="用到的工具"><a href="#用到的工具" class="headerlink" title="用到的工具"></a>用到的工具</h2><p>SS代理——寒梅：<a href="https://itunes.apple.com/sg/app/%E5%AF%92%E6%A2%85-mume-red/id1453275281" target="_blank" rel="noopener">美区AppStore下载地址</a></p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1g24r70omm8j31400u0769.jpg" alt=""></p>
+<p><img src="https://wx1.sinaimg.cn/large/006tNc79ly1g24r70omm8j31400u0769.jpg" alt=""></p>
 <p>IOS网络抓包分析工具——Suger：<a href="https://itunes.apple.com/us/app/surge-3/id1442620678" target="_blank" rel="noopener">美区AppStore下载地址</a></p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1g24qpbjleij31400u0gny.jpg" alt=""></p>
+<p><img src="https://wx1.sinaimg.cn/large/006tNc79ly1g24qpbjleij31400u0gny.jpg" alt=""></p>
 <a id="more"></a>
 <h2 id="分析网络请求"><a href="#分析网络请求" class="headerlink" title="分析网络请求"></a>分析网络请求</h2><p>这里以邮箱应用Spark为例，当我使用寒梅的“墙外屏蔽地址”、“中国区直连”代理规则时，发现Spark并未在代理之列。那么如何将Spark通过自定义规则添加到代理列表中呢？</p>
 <p>基础思路是：</p>
@@ -453,14 +453,14 @@
 <p>第一步，使用Suger抓取网络请求。</p>
 <p>打开 Suger 主界面便如上面所示，打开 “抓取流量” 按钮，点击顶部的启动，便可开始抓取 ios 上的所有网络请求。</p>
 <p>现打开 Spark（需要特别代理的软件），随意刷新页面（发起网络请求）返回 Suger 选择 “最近的请求”，查看网络请求抓取情况，如下：</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1g24qoh7ky8j31400u078s.jpg" alt=""></p>
+<p><img src="https://wx1.sinaimg.cn/large/006tNc79ly1g24qoh7ky8j31400u078s.jpg" alt=""></p>
 <p>这里可以看到本机最近发出的所有网络请求，并标记了发出请求的应用名称。可以看到红色框中所有的网络请求都失败了，而且都是由 Spark 发出的。</p>
 <p>这里涉及的请求域名只有两个：</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">app.smartmailcloud.com</span></span><br><span class="line"><span class="attribute"></span></span><br><span class="line"><span class="attribute">accounts.google.com</span></span><br></pre></td></tr></table></figure>
 <p>如果你有使用谷歌的经历，应该知道 <code>google.com</code> 是谷歌的域名，而 <code>accounts.google.com</code> 便是谷歌账户所使用的域名。我这里因为使用的邮箱是 Gmail，所以才会出现这条请求。</p>
 <h2 id="自定义代理规则"><a href="#自定义代理规则" class="headerlink" title="自定义代理规则"></a>自定义代理规则</h2><p>因为 寒梅 的默认代理规则中已经包含了对 <code>*.goole.com</code>，事实上，几乎所有的代理应用代理规则中都包含对谷歌域名。那么意味着，如果想要正常使用 Spark，只需要将 <code>app.smartmailcloud.com</code> 加入到自定义代理规则中即可。</p>
 <p>打开 寒梅，选择 “规则组” -&gt; 右上角”+”，填写规则名称，点击添加规则，这里有三项内容：</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1g24skayddcj31400u0wg2.jpg" alt=""></p>
+<p><img src="https://wx1.sinaimg.cn/large/006tNc79ly1g24skayddcj31400u0wg2.jpg" alt=""></p>
 <ul>
 <li>类型，共有5个选项<ul>
 <li>DOMAIN-SUFFIX，根据域名后缀匹配</li>
@@ -481,9 +481,9 @@
 <p>更详细的解释在应用内参看使用手册。按以上规则，我们便可以轻松地为 Spark 添加代理了。如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">类型: DOMAIN-SUFFIX</span><br><span class="line">值：  smartmailcloud.com</span><br><span class="line">操作: PROXY</span><br></pre></td></tr></table></figure>
 <p>点击完成即可。</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1g24rb1y3aoj31400u0wg2.jpg" alt=""></p>
+<p><img src="https://wx1.sinaimg.cn/large/006tNc79ly1g24rb1y3aoj31400u0wg2.jpg" alt=""></p>
 <p>现在回到 寒梅 的 “首页”，点击下方的 “添加规则组”，选择刚才所创建的规则组就可以令自定义规则生效了。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1g24r70omm8j31400u0769.jpg" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="https://wx1.sinaimg.cn/large/006tNc79ly1g24r70omm8j31400u0769.jpg" alt=""></p>
 <p>可以看到，寒梅也提供了 “默认走代理” 的选项，不过国内不建议打开该配置，原因如最初所说，这样只会使国内的网络请求更慢。我的选择便是：“代理被屏蔽的站点”、“自定义规则”。</p>
 <p>除了自定义代理规则，寒梅还提供了一些免费的节点供用户使用，虽然体验上可能不太好，但是免费的机场总是令人激动的。寒梅 这款代理应用，虽然只支持 ss 和 socks5协议，不支持V2Ray协议多少令人有些失望，不过自定义代理规则、免费节点这些集成在一款免费代理应用中，也是令人激动的。</p>
 
