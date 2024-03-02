@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-m.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/m_32_32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/m_16_16.png">
+  <link rel="mask-icon" href="/images/apple-touch-icon-m.png" color="#222">
+  <meta name="google-site-verification" content="7biOwoseRGn9zLZjqZVvrNadToAGciN5bHtcREVehPI">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mangococo.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Spring Security 中提供了默认的用户登录页面，但在实际项目中默认的登录页自然是无法满足需求的，这里不讨论如何自定义登录页，仅针对自定义表单登录页面后如何获取用户验证错误信息，并如上图一样为用户呈现提示说说自己的方案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Security 自定义登录页面如何获取用户验证错误信息">
+<meta property="og:url" content="https://mangococo.github.io/2019/03/28/spring-security-login-error-process/index.html">
+<meta property="og:site_name" content="芒枸公社">
+<meta property="og:description" content="Spring Security 中提供了默认的用户登录页面，但在实际项目中默认的登录页自然是无法满足需求的，这里不讨论如何自定义登录页，仅针对自定义表单登录页面后如何获取用户验证错误信息，并如上图一样为用户呈现提示说说自己的方案。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mangococo.github.io/2019/03/28/spring-security-login-error-process/spring-security-login-error-process-1.jpg">
+<meta property="og:image" content="https://mangococo.github.io/2019/03/28/spring-security-login-error-process/spring-security-login-error-process-2.jpg">
+<meta property="og:image" content="https://mangococo.github.io/2019/03/28/spring-security-login-error-process/spring-security-login-error-process-3.jpg">
+<meta property="og:image" content="https://mangococo.github.io/2019/03/28/spring-security-login-error-process/spring-security-login-error-process-4.jpg">
+<meta property="og:image" content="https://mangococo.github.io/2019/03/28/spring-security-login-error-process/spring-security-login-error-process-5.jpg">
+<meta property="article:published_time" content="2019-03-27T17:46:10.000Z">
+<meta property="article:modified_time" content="2024-03-02T15:26:40.607Z">
+<meta property="article:author" content="懂同学">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="spring">
+<meta property="article:tag" content="spring mvc">
+<meta property="article:tag" content="RESTful APl">
+<meta property="article:tag" content="spring security">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mangococo.github.io/2019/03/28/spring-security-login-error-process/spring-security-login-error-process-1.jpg">
+
+
+<link rel="canonical" href="https://mangococo.github.io/2019/03/28/spring-security-login-error-process/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mangococo.github.io/2019/03/28/spring-security-login-error-process/","path":"2019/03/28/spring-security-login-error-process/","title":"Spring Security 自定义登录页面如何获取用户验证错误信息"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Spring Security 自定义登录页面如何获取用户验证错误信息 | 芒枸公社</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">芒枸公社</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">懂同学的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-security-%E4%B8%AD%E7%94%A8%E6%88%B7%E9%AA%8C%E8%AF%81%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E5%8E%BB%E4%BA%86%E5%93%AA%E9%87%8C%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">Spring security 中用户验证错误信息去了哪里？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E9%AA%8C%E8%AF%81%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF"><span class="nav-number">2.</span> <span class="nav-text">自定义登录页面获取用户验证错误信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C"><span class="nav-number">3.</span> <span class="nav-text">测试结果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F-APP-%E5%8F%91%E8%B5%B7%E8%AF%B7%E6%B1%82"><span class="nav-number">3.1.</span> <span class="nav-text">模拟 APP 发起请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E9%9D%9E-login-html-%E5%8F%91%E8%B5%B7%E8%AF%B7%E6%B1%82"><span class="nav-number">3.2.</span> <span class="nav-text">模拟非 login.html 发起请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%99%BB%E5%BD%95%E9%A1%B5%E6%B5%8B%E8%AF%95"><span class="nav-number">3.3.</span> <span class="nav-text">自定义登录页测试</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="懂同学"
+      src="/images/mm.png">
+  <p class="site-author-name" itemprop="name">懂同学</p>
+  <div class="site-description" itemprop="description">习得技与才，立于天地间</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/mangococo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mangococo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:blackocean1127@gmail.com" title="E-Mail → mailto:blackocean1127@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/mangococo" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;mangococo" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mangococo.github.io/2019/03/28/spring-security-login-error-process/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mm.png">
+      <meta itemprop="name" content="懂同学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="芒枸公社">
+      <meta itemprop="description" content="习得技与才，立于天地间">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Spring Security 自定义登录页面如何获取用户验证错误信息 | 芒枸公社">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring Security 自定义登录页面如何获取用户验证错误信息
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-28 01:46:10" itemprop="dateCreated datePublished" datetime="2019-03-28T01:46:10+08:00">2019-03-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2019/03/28/spring-security-login-error-process/" class="post-meta-item leancloud_visitors" data-flag-title="Spring Security 自定义登录页面如何获取用户验证错误信息" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="/2019/03/28/spring-security-login-error-process/spring-security-login-error-process-1.jpg"></p>
+<p>Spring Security 中提供了默认的用户登录页面，但在实际项目中默认的登录页自然是无法满足需求的，这里不讨论如何自定义登录页，仅针对自定义表单登录页面后如何获取用户验证错误信息，并如上图一样为用户呈现提示说说自己的方案。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>如果你清楚Spring Security默认的错误处理，那么你可以跳过接下来的章节。</p>
+</blockquote>
+<h2 id="Spring-security-中用户验证错误信息去了哪里？"><a href="#Spring-security-中用户验证错误信息去了哪里？" class="headerlink" title="Spring security 中用户验证错误信息去了哪里？"></a>Spring security 中用户验证错误信息去了哪里？</h2><p>Spring Security 中主要通过 <code>AbstractAuthenticationProcessingFilter</code>处理登录，而其孩子类<code>UsernamePasswordAuthenticationFilter</code> 则负责处理表单登录逻辑，看看源码：</p>
+<p>AbstractAuthenticationProcessingFilter：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest req, ServletResponse res, FilterChain chain)</span></span><br><span class="line">		<span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">	Authentication authResult;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">	   <span class="comment">// 此处调用 UsernamePasswordAuthenticationFilter 的处理逻辑。</span></span><br><span class="line">	   authResult = attemptAuthentication(request, response);</span><br><span class="line">		<span class="keyword">if</span> (authResult == <span class="literal">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		sessionStrategy.onAuthentication(authResult, request, response);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">catch</span> (InternalAuthenticationServiceException failed) &#123;</span><br><span class="line">		logger.error(</span><br><span class="line">				<span class="string">&quot;An internal error occurred while trying to authenticate the user.&quot;</span>,</span><br><span class="line">				failed);</span><br><span class="line">		unsuccessfulAuthentication(request, response, failed);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">catch</span> (AuthenticationException failed) &#123;</span><br><span class="line">		<span class="comment">// 用户验证失败</span></span><br><span class="line">		unsuccessfulAuthentication(request, response, failed);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 验证成功处理</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>attemptAuthentication(request, response)</code>中是从 request 中提取 username、password 以及调用 Provider 验证的过程，这一过程并非本文重点，不做详述。</p>
+<p>可以看到，当用户验证失败后，会交给 <code>unsuccessfulAuthentication(..., exception)</code> 处理。看看它的实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">unsuccessfulAuthentication</span><span class="params">(HttpServletRequest request,</span></span><br><span class="line"><span class="params">			HttpServletResponse response, AuthenticationException failed)</span></span><br><span class="line">			<span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">		SecurityContextHolder.clearContext();</span><br><span class="line"></span><br><span class="line">		<span class="comment">// log ...</span></span><br><span class="line"></span><br><span class="line">		rememberMeServices.loginFail(request, response);</span><br><span class="line"></span><br><span class="line">     <span class="comment">// 调用 AuthenticationFailureHandler 处理登录错误</span></span><br><span class="line">		failureHandler.onAuthenticationFailure(request, response, failed);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>若开发者没有自定义失败处理器，则会调用默认的失败处理器—— <code>SimpleUrlAuthenticationFailureHandler</code> 的实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onAuthenticationFailure</span><span class="params">(HttpServletRequest request,</span></span><br><span class="line"><span class="params">			HttpServletResponse response, AuthenticationException exception)</span></span><br><span class="line">		<span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">   <span class="comment">// 未定义失败跳转的URL，默认为非浏览器访问（或APP），返回JSON</span></span><br><span class="line">	<span class="keyword">if</span> (defaultFailureUrl == <span class="literal">null</span>) &#123;</span><br><span class="line">		logger.debug(<span class="string">&quot;No failure URL set, sending 401 Unauthorized error&quot;</span>);</span><br><span class="line"></span><br><span class="line">		response.sendError(HttpStatus.UNAUTHORIZED.value(),</span><br><span class="line">			HttpStatus.UNAUTHORIZED.getReasonPhrase());</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">	   <span class="comment">// 保存错误信息</span></span><br><span class="line">		saveException(request, exception);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (forwardToDestination) &#123;</span><br><span class="line">			logger.debug(<span class="string">&quot;Forwarding to &quot;</span> + defaultFailureUrl);</span><br><span class="line"></span><br><span class="line">			request.getRequestDispatcher(defaultFailureUrl)</span><br><span class="line">					.forward(request, response);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			logger.debug(<span class="string">&quot;Redirecting to &quot;</span> + defaultFailureUrl);</span><br><span class="line">			redirectStrategy.sendRedirect(request, response, defaultFailureUrl);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当用户自定义了错误跳转URL时（若未自定义登录页面，那默认的错误跳转页为 <code>/login?error</code>），Spring Security 会调用 <code>saveException(...)</code>，后将用户导向登录失败页面。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">saveException</span><span class="params">(HttpServletRequest request,</span></span><br><span class="line"><span class="params">			AuthenticationException exception)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (forwardToDestination) &#123;</span><br><span class="line">    <span class="comment">// 错误信息的去处</span></span><br><span class="line">		request.setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION, exception);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="type">HttpSession</span> <span class="variable">session</span> <span class="operator">=</span> request.getSession(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (session != <span class="literal">null</span> || allowSessionCreation) &#123;</span><br><span class="line">		<span class="comment">// 错误信息的去处</span></span><br><span class="line">    request.getSession().setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION,</span><br><span class="line">					exception);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在一切都明了了，Spring Security 将用户认证错误的信息放在了<code>Session</code>中，而存放的 Key 便是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">AUTHENTICATION_EXCEPTION</span> <span class="operator">=</span> <span class="string">&quot;SPRING_SECURITY_LAST_EXCEPTION&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义登录页面获取用户验证错误信息"><a href="#自定义登录页面获取用户验证错误信息" class="headerlink" title="自定义登录页面获取用户验证错误信息"></a>自定义登录页面获取用户验证错误信息</h2><p>当我们自定义登录页面后，在自己的登录页上显示错误提示自然是需求之中了。而由于使用 form 表单进行登录，当 submit 后页面会被刷新，服务器无法通过 <code>response</code> 返回用户认证错误的信息。我采取的方案是当用户登录错误是将用户认证错误的信息存放在 <code>session</code> 中，同时将其导向登录页面 <code>/login?error</code>，不过此时请求路径中多了一项 <code>error</code> 参数，前端通过检测路径中是否有 <code>error</code> 参数，若存在，则向服务器发送 Ajax 请求获取错误信息。</p>
+<p>一个简单的 demo：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;p <span class="keyword">class</span>=<span class="string">&quot;error-msg&quot;</span> id=<span class="string">&quot;error-msg&quot;</span>&gt;&lt;/p&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">function</span> <span class="title function_">hasParameter</span>(<span class="params">para</span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> reg = <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">&quot;(^|&amp;)&quot;</span> + para + <span class="string">&quot;([^&amp;]*)(&amp;|$)&quot;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">let</span> r = <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">search</span>.<span class="title function_">substr</span>(<span class="number">1</span>).<span class="title function_">match</span>(reg);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">return</span> r != <span class="literal">null</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    (<span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">if</span> (<span class="title function_">hasParameter</span>(<span class="string">&#x27;error&#x27;</span>)) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            $.<span class="title function_">ajax</span>(&#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                <span class="attr">url</span>:<span class="string">&quot;./authentication/error&quot;</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                success :<span class="keyword">function</span>(<span class="params">result</span>)&#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(result);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                    $(<span class="string">&quot;#error-msg&quot;</span>).<span class="title function_">html</span>(result.<span class="property">content</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            &#125;);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;)();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>而服务器端，我创建了一个获取错误信息的 Controller：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoginErrorController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AssistantCoreProperties properties;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">RedirectStrategy</span> <span class="variable">redirectStrategy</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DefaultRedirectStrategy</span>();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/authentication/error&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> SimpleResponse <span class="title function_">loginError</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">SimpleResponse</span> <span class="variable">simpleResponse</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleResponse</span>();</span><br><span class="line">        <span class="type">String</span> <span class="variable">from</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;Referer&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 判定为非浏览器（或APP）访问</span></span><br><span class="line">        <span class="keyword">if</span> (from == <span class="literal">null</span> || !StringUtils.contains(from, <span class="string">&quot;.html&quot;</span>)) &#123;</span><br><span class="line">            response.sendError(HttpStatus.NOT_FOUND.value(),</span><br><span class="line">                    HttpStatus.NOT_FOUND.getReasonPhrase());</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// from login.html?error</span></span><br><span class="line">        <span class="keyword">if</span> (StringUtils.contains(from, properties.getFailureUrl())) &#123;</span><br><span class="line">            <span class="type">AuthenticationException</span> <span class="variable">exception</span> <span class="operator">=</span></span><br><span class="line">                    (AuthenticationException)request.getSession().getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (exception == <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> simpleResponse;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            simpleResponse.setContent(exception.getMessage());</span><br><span class="line">            request.getSession().removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            redirectStrategy.sendRedirect(request, response, <span class="string">&quot;/404.html&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> simpleResponse;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>服务器经过验证，将用户认证错误的信息发给前端后将错误信息从 <code>session</code> 中清除掉。</p>
+<hr>
+<p>更新，2019年04月01日：</p>
+<p>当创建 “错误信息获取” 的 <code>LoginErrorController</code>后，还需要再做一步：将获取错误信息的请求 URL 添加到 Spring Security 的审查例外中。</p>
+<p>eg：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    http.authorizeRequests().antMatchers(<span class="string">&quot;/authentication/error&quot;</span>).permitAll();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><h3 id="模拟-APP-发起请求"><a href="#模拟-APP-发起请求" class="headerlink" title="模拟 APP 发起请求"></a>模拟 APP 发起请求</h3><p><img src="/2019/03/28/spring-security-login-error-process/spring-security-login-error-process-2.jpg"></p>
+<h3 id="模拟非-login-html-发起请求"><a href="#模拟非-login-html-发起请求" class="headerlink" title="模拟非 login.html 发起请求"></a>模拟非 login.html 发起请求</h3><p>Code：<br><img src="/2019/03/28/spring-security-login-error-process/spring-security-login-error-process-3.jpg"></p>
+<p>结果：</p>
+<p><img src="/2019/03/28/spring-security-login-error-process/spring-security-login-error-process-4.jpg"></p>
+<h3 id="自定义登录页测试"><a href="#自定义登录页测试" class="headerlink" title="自定义登录页测试"></a>自定义登录页测试</h3><p><img src="/2019/03/28/spring-security-login-error-process/spring-security-login-error-process-5.jpg"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/spring/" rel="tag"># spring</a>
+              <a href="/tags/spring-mvc/" rel="tag"># spring mvc</a>
+              <a href="/tags/RESTful-APl/" rel="tag"># RESTful APl</a>
+              <a href="/tags/spring-security/" rel="tag"># spring security</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/02/17/mysql-user-operations/" rel="prev" title="MySQL 命令行进行用户基本操作">
+                  <i class="fa fa-angle-left"></i> MySQL 命令行进行用户基本操作
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/04/15/ios-customize-ss-proxy/" rel="next" title="IOS 设置自定义 ss 代理">
+                  IOS 设置自定义 ss 代理 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">懂同学</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"MMcqWJy3sJ5y8W7JI8qoH1G1-gzGzoHsz","app_key":"9SoVbiw1buHEL089ydbRt9ug","server_url":"https://mangococo.github.io","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>

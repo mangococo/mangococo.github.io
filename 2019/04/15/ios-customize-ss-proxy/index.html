@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-m.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/m_32_32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/m_16_16.png">
+  <link rel="mask-icon" href="/images/apple-touch-icon-m.png" color="#222">
+  <meta name="google-site-verification" content="7biOwoseRGn9zLZjqZVvrNadToAGciN5bHtcREVehPI">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mangococo.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="说起科学上网，其实IOS上代理软件真的算得上是百花齐放，但同时也是良莠不齐。可能是由于IOS系统的的沙盒机制，我并未在App Store中看到像Android端Shadowsocks那样支持应用绕行模式的代理软件，最起码免费的代理软件中没有这样功能的。 但是，这种需求是的的确确存在的。我们不希望所有网络请求都经过代理转发，像国内的App、IOS系统的请求。其实，现大多代理App的自动代理规则已包含">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IOS 设置自定义 ss 代理">
+<meta property="og:url" content="https://mangococo.github.io/2019/04/15/ios-customize-ss-proxy/index.html">
+<meta property="og:site_name" content="芒枸公社">
+<meta property="og:description" content="说起科学上网，其实IOS上代理软件真的算得上是百花齐放，但同时也是良莠不齐。可能是由于IOS系统的的沙盒机制，我并未在App Store中看到像Android端Shadowsocks那样支持应用绕行模式的代理软件，最起码免费的代理软件中没有这样功能的。 但是，这种需求是的的确确存在的。我们不希望所有网络请求都经过代理转发，像国内的App、IOS系统的请求。其实，现大多代理App的自动代理规则已包含">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mangococo.github.io/2019/04/15/ios-customize-ss-proxy/ios-customize-ss-proxy-1.jpg">
+<meta property="og:image" content="https://mangococo.github.io/2019/04/15/ios-customize-ss-proxy/ios-customize-ss-proxy-2.jpg">
+<meta property="og:image" content="https://mangococo.github.io/2019/04/15/ios-customize-ss-proxy/ios-customize-ss-proxy-6.jpg">
+<meta property="og:image" content="https://mangococo.github.io/2019/04/15/ios-customize-ss-proxy/ios-customize-ss-proxy-5.jpg">
+<meta property="og:image" content="https://mangococo.github.io/2019/04/15/ios-customize-ss-proxy/ios-customize-ss-proxy-3.jpg">
+<meta property="og:image" content="https://mangococo.github.io/2019/04/15/ios-customize-ss-proxy/ios-customize-ss-proxy-4.jpg">
+<meta property="article:published_time" content="2019-04-14T17:46:10.000Z">
+<meta property="article:modified_time" content="2024-03-02T15:26:02.605Z">
+<meta property="article:author" content="懂同学">
+<meta property="article:tag" content="IOS">
+<meta property="article:tag" content="iPad">
+<meta property="article:tag" content="科学上网">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mangococo.github.io/2019/04/15/ios-customize-ss-proxy/ios-customize-ss-proxy-1.jpg">
+
+
+<link rel="canonical" href="https://mangococo.github.io/2019/04/15/ios-customize-ss-proxy/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mangococo.github.io/2019/04/15/ios-customize-ss-proxy/","path":"2019/04/15/ios-customize-ss-proxy/","title":"IOS 设置自定义 ss 代理"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>IOS 设置自定义 ss 代理 | 芒枸公社</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">芒枸公社</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">懂同学的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E5%88%B0%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="nav-number">1.</span> <span class="nav-text">用到的工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82"><span class="nav-number">2.</span> <span class="nav-text">分析网络请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BB%A3%E7%90%86%E8%A7%84%E5%88%99"><span class="nav-number">3.</span> <span class="nav-text">自定义代理规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="懂同学"
+      src="/images/mm.png">
+  <p class="site-author-name" itemprop="name">懂同学</p>
+  <div class="site-description" itemprop="description">习得技与才，立于天地间</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/mangococo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mangococo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:blackocean1127@gmail.com" title="E-Mail → mailto:blackocean1127@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/mangococo" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;mangococo" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mangococo.github.io/2019/04/15/ios-customize-ss-proxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mm.png">
+      <meta itemprop="name" content="懂同学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="芒枸公社">
+      <meta itemprop="description" content="习得技与才，立于天地间">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="IOS 设置自定义 ss 代理 | 芒枸公社">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          IOS 设置自定义 ss 代理
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-04-15 01:46:10" itemprop="dateCreated datePublished" datetime="2019-04-15T01:46:10+08:00">2019-04-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%88%B1%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">爱折腾</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%88%B1%E6%8A%98%E8%85%BE/%E8%BD%AF%E4%BB%B6%E4%BD%93%E9%AA%8C/" itemprop="url" rel="index"><span itemprop="name">软件体验</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2019/04/15/ios-customize-ss-proxy/" class="post-meta-item leancloud_visitors" data-flag-title="IOS 设置自定义 ss 代理" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>说起科学上网，其实IOS上代理软件真的算得上是百花齐放，但同时也是良莠不齐。可能是由于IOS系统的的沙盒机制，我并未在App Store中看到像Android端Shadowsocks那样支持应用绕行模式的代理软件，最起码免费的代理软件中没有这样功能的。</p>
+<p>但是，这种需求是的的确确存在的。我们不希望所有网络请求都经过代理转发，像国内的App、IOS系统的请求。其实，现大多代理App的自动代理规则已包含了高墙外绝大多数域名解析，但总是存在不在代理规则之内的，那这时要怎么做呢？或者你说那完全可以需要的时候打开代理，不需要的时候关闭即可。的确是一种解决方案，但如果能自动化，又何乐而不为呢？</p>
+<p>那么，如何通过一款免费的ss代理软件，模拟实现Android端Shadowsocks若星模式的功能呢？</p>
+<h2 id="用到的工具"><a href="#用到的工具" class="headerlink" title="用到的工具"></a>用到的工具</h2><p>SS代理——寒梅：<a target="_blank" rel="noopener" href="https://itunes.apple.com/sg/app/%E5%AF%92%E6%A2%85-mume-red/id1453275281">美区AppStore下载地址</a></p>
+<p><img src="/2019/04/15/ios-customize-ss-proxy/ios-customize-ss-proxy-1.jpg"></p>
+<p>IOS网络抓包分析工具——Suger：<a target="_blank" rel="noopener" href="https://itunes.apple.com/us/app/surge-3/id1442620678">美区AppStore下载地址</a></p>
+<p><img src="/2019/04/15/ios-customize-ss-proxy/ios-customize-ss-proxy-2.jpg"></p>
+<span id="more"></span>
+
+<h2 id="分析网络请求"><a href="#分析网络请求" class="headerlink" title="分析网络请求"></a>分析网络请求</h2><p>这里以邮箱应用Spark为例，当我使用寒梅的“墙外屏蔽地址”、“中国区直连”代理规则时，发现Spark并未在代理之列。那么如何将Spark通过自定义规则添加到代理列表中呢？</p>
+<p>基础思路是：</p>
+<ul>
+<li>通过Suger抓取Spark邮箱发出的网络请求，分析找出失败的网络请求（未被代理）</li>
+<li>将未被代理的请求域名添加至寒梅自定义规则中</li>
+</ul>
+<p>第一步，使用Suger抓取网络请求。</p>
+<p>打开 Suger 主界面便如上面所示，打开 “抓取流量” 按钮，点击顶部的启动，便可开始抓取 ios 上的所有网络请求。</p>
+<p>现打开 Spark（需要特别代理的软件），随意刷新页面（发起网络请求）返回 Suger 选择 “最近的请求”，查看网络请求抓取情况，如下：</p>
+<p><img src="/2019/04/15/ios-customize-ss-proxy/ios-customize-ss-proxy-6.jpg"></p>
+<p>这里可以看到本机最近发出的所有网络请求，并标记了发出请求的应用名称。可以看到红色框中所有的网络请求都失败了，而且都是由 Spark 发出的。</p>
+<p>这里涉及的请求域名只有两个：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.smartmailcloud.com</span><br><span class="line"></span><br><span class="line">accounts.google.com</span><br></pre></td></tr></table></figure>
+
+<p>如果你有使用谷歌的经历，应该知道 <code>google.com</code> 是谷歌的域名，而 <code>accounts.google.com</code> 便是谷歌账户所使用的域名。我这里因为使用的邮箱是 Gmail，所以才会出现这条请求。</p>
+<h2 id="自定义代理规则"><a href="#自定义代理规则" class="headerlink" title="自定义代理规则"></a>自定义代理规则</h2><p>因为 寒梅 的默认代理规则中已经包含了对 <code>*.goole.com</code>，事实上，几乎所有的代理应用代理规则中都包含对谷歌域名。那么意味着，如果想要正常使用 Spark，只需要将 <code>app.smartmailcloud.com</code> 加入到自定义代理规则中即可。</p>
+<p>打开 寒梅，选择 “规则组” -&gt; 右上角”+”，填写规则名称，点击添加规则，这里有三项内容：</p>
+<p><img src="/2019/04/15/ios-customize-ss-proxy/ios-customize-ss-proxy-5.jpg"></p>
+<ul>
+<li>类型，共有5个选项<ul>
+<li>DOMAIN-SUFFIX，根据域名后缀匹配</li>
+<li>DOMAIN-MATCH，根据关键字匹配域名</li>
+<li>DOMAIN，域名绝对匹配</li>
+<li>IP-CIDR，匹配处在给定域内的 IP</li>
+<li>GEO 匹配给定地理区域内的 IP (使用 Country Code 指定)</li>
+</ul>
+</li>
+<li>值，需要添加规则的请求</li>
+<li>操作，共有三个选项<ul>
+<li>DORECT，直连</li>
+<li>PROXY，使用代理吃连接</li>
+<li>REJECT，拒绝访问网络</li>
+</ul>
+</li>
+</ul>
+<p>更详细的解释在应用内参看使用手册。按以上规则，我们便可以轻松地为 Spark 添加代理了。如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">类型: DOMAIN-SUFFIX</span><br><span class="line">值：  smartmailcloud.com</span><br><span class="line">操作: PROXY</span><br></pre></td></tr></table></figure>
+<p>点击完成即可。</p>
+<p><img src="/2019/04/15/ios-customize-ss-proxy/ios-customize-ss-proxy-3.jpg"></p>
+<p>现在回到 寒梅 的 “首页”，点击下方的 “添加规则组”，选择刚才所创建的规则组就可以令自定义规则生效了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="/2019/04/15/ios-customize-ss-proxy/ios-customize-ss-proxy-4.jpg"></p>
+<p>可以看到，寒梅也提供了 “默认走代理” 的选项，不过国内不建议打开该配置，原因如最初所说，这样只会使国内的网络请求更慢。我的选择便是：“代理被屏蔽的站点”、“自定义规则”。</p>
+<p>除了自定义代理规则，寒梅还提供了一些免费的节点供用户使用，虽然体验上可能不太好，但是免费的机场总是令人激动的。寒梅 这款代理应用，虽然只支持 ss 和 socks5协议，不支持V2Ray协议多少令人有些失望，不过自定义代理规则、免费节点这些集成在一款免费代理应用中，也是令人激动的。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/IOS/" rel="tag"># IOS</a>
+              <a href="/tags/iPad/" rel="tag"># iPad</a>
+              <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag"># 科学上网</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/03/28/spring-security-login-error-process/" rel="prev" title="Spring Security 自定义登录页面如何获取用户验证错误信息">
+                  <i class="fa fa-angle-left"></i> Spring Security 自定义登录页面如何获取用户验证错误信息
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/04/16/idea-moudles-maven-build/" rel="next" title="Spring Boot 多模块开发时，Maven编译可运行 jar 包">
+                  Spring Boot 多模块开发时，Maven编译可运行 jar 包 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">懂同学</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"MMcqWJy3sJ5y8W7JI8qoH1G1-gzGzoHsz","app_key":"9SoVbiw1buHEL089ydbRt9ug","server_url":"https://mangococo.github.io","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>

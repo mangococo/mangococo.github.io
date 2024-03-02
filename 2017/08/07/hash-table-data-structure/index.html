@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-m.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/m_32_32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/m_16_16.png">
+  <link rel="mask-icon" href="/images/apple-touch-icon-m.png" color="#222">
+  <meta name="google-site-verification" content="7biOwoseRGn9zLZjqZVvrNadToAGciN5bHtcREVehPI">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mangococo.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="散列表散列表（Hash table，也叫哈希表），是根据关键字值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。 散列表的思想其实很简单，就是把 Key（任意长度）通过一个固定的算法函数,即所谓的哈希函数转换成一个整型数字(固定长度)，然后就将该数字对数组长度进行取余，取余">
+<meta property="og:type" content="article">
+<meta property="og:title" content="散列表的学习笔记">
+<meta property="og:url" content="https://mangococo.github.io/2017/08/07/hash-table-data-structure/index.html">
+<meta property="og:site_name" content="芒枸公社">
+<meta property="og:description" content="散列表散列表（Hash table，也叫哈希表），是根据关键字值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。 散列表的思想其实很简单，就是把 Key（任意长度）通过一个固定的算法函数,即所谓的哈希函数转换成一个整型数字(固定长度)，然后就将该数字对数组长度进行取余，取余">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.imgur.com/1rUEkhv.jpg">
+<meta property="article:published_time" content="2017-08-07T06:39:43.000Z">
+<meta property="article:modified_time" content="2024-03-02T10:19:19.738Z">
+<meta property="article:author" content="懂同学">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="哈希">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/1rUEkhv.jpg">
+
+
+<link rel="canonical" href="https://mangococo.github.io/2017/08/07/hash-table-data-structure/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mangococo.github.io/2017/08/07/hash-table-data-structure/","path":"2017/08/07/hash-table-data-structure/","title":"散列表的学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>散列表的学习笔记 | 芒枸公社</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">芒枸公社</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">懂同学的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%A3%E5%88%97%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">散列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%A3%E5%88%97%E7%AE%97%E6%B3%95%E3%80%82"><span class="nav-number">1.1.</span> <span class="nav-text">散列算法。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%A4%E6%B3%95%E6%95%A3%E5%88%97%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">除法散列法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E6%96%B9%E6%95%A3%E5%88%97%E6%B3%95"><span class="nav-number">1.1.2.</span> <span class="nav-text">平方散列法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%A3%E5%88%97%E6%B3%95"><span class="nav-number">1.1.3.</span> <span class="nav-text">斐波那契散列法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81"><span class="nav-number">1.2.</span> <span class="nav-text">哈希冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E6%94%BE%E5%AF%BB%E5%9D%80%E6%B3%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">开放寻址法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%8E%A2%E6%B5%8B%E5%86%8D%E6%95%A3%E5%88%97"><span class="nav-number">1.2.2.</span> <span class="nav-text">线性探测再散列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%8E%A2%E6%B5%8B%E6%B3%95%E5%A4%84%E7%90%86%E5%86%B2%E7%AA%81%E7%9A%84%E4%BD%86%E5%AD%98%E5%9C%A8%E4%B8%8B%E5%88%97%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">线性探测法处理冲突的但存在下列缺点：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E6%AC%A1%E6%8E%A2%E6%B5%8B%E5%86%8D%E6%95%A3%E5%88%97"><span class="nav-number">1.2.3.</span> <span class="nav-text">二次探测再散列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%8E%A2%E6%B5%8B%E5%86%8D%E6%95%A3%E5%88%97"><span class="nav-number">1.2.4.</span> <span class="nav-text">伪随机探测再散列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%89%E9%93%BE%E6%B3%95"><span class="nav-number">1.2.5.</span> <span class="nav-text">拉链法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%89%E9%93%BE%E6%B3%95%E7%9A%84%E4%BC%98%E7%82%B9%EF%BC%9A"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">拉链法的优点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%89%E9%93%BE%E6%B3%95%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">拉链法的缺点</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="懂同学"
+      src="/images/mm.png">
+  <p class="site-author-name" itemprop="name">懂同学</p>
+  <div class="site-description" itemprop="description">习得技与才，立于天地间</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/mangococo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mangococo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:blackocean1127@gmail.com" title="E-Mail → mailto:blackocean1127@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/mangococo" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;mangococo" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mangococo.github.io/2017/08/07/hash-table-data-structure/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mm.png">
+      <meta itemprop="name" content="懂同学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="芒枸公社">
+      <meta itemprop="description" content="习得技与才，立于天地间">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="散列表的学习笔记 | 芒枸公社">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          散列表的学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-08-07 14:39:43" itemprop="dateCreated datePublished" datetime="2017-08-07T14:39:43+08:00">2017-08-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2017/08/07/hash-table-data-structure/" class="post-meta-item leancloud_visitors" data-flag-title="散列表的学习笔记" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h1><p>散列表（Hash table，也叫哈希表），是根据关键字值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。</p>
+<p>散列表的思想其实很简单，就是把 Key（任意长度）通过一个固定的算法函数,即所谓的哈希函数转换成一个整型数字(固定长度)，然后就将该数字对数组长度进行取余，取余结果就当作数组的下标，将value存储在该下标的数组空间里。</p>
+<p>而当使用哈希表进行查询的时候，就是再次使用哈希函数将key转换为对应的数组下标，并定位到该空间获取value，如此一来，就可以充分利用到数组的定位性能进行数据定位。</p>
+<h2 id="散列算法。"><a href="#散列算法。" class="headerlink" title="散列算法。"></a>散列算法。</h2><p>根据 key（数据特征） 计算出对应数据的存储位置的算法叫做散列算法（<code>position=hash(key);</code>，又称哈希算法。</p>
+<span id="more"></span>
+
+<p>散列算法需要满足一下条件：</p>
+<ul>
+<li>对输入值进行运算后，应得到固定长度的计算结果；</li>
+<li>对于不同的输入值，得到的结构可能相同。</li>
+<li>散列函数的输出值尽量接近均匀分布。</li>
+<li>x的微小变化可以使f(x)发生非常大的变化，即所谓“雪崩效应”(Avalanche effect)。</li>
+</ul>
+<p>例如：</p>
+<blockquote>
+<p>$  f(x) &#x3D; x  % 16 $<br>$ f(x) &#x3D; (x^2 + 10) * x $<br>$ f(x) &#x3D; (x | 0×0000FFFF) XOR (x &gt;&gt; 16) $</p>
+</blockquote>
+<h3 id="除法散列法"><a href="#除法散列法" class="headerlink" title="除法散列法"></a>除法散列法</h3><p>公式:</p>
+<blockquote>
+<p><code> f(x) = x % N</code>（N为常数，不大于数组的长度）</p>
+</blockquote>
+<p>取关键字被某个不大于散列表表长 L 的数 N 除后所得的余数为散列地址。对 N 的选择很重要，一般取”素数”或 L，若 N 选的不好，容易产生同义词</p>
+<h3 id="平方散列法"><a href="#平方散列法" class="headerlink" title="平方散列法"></a>平方散列法</h3><p>公式： <code>index = (value * value) &gt;&gt; 28 </code>  （右移，除以2^28。记法：左移变大，是乘。右移变小，是除。）</p>
+<p>当无法确定关键字中哪几位分布较均匀时，可以先求出关键字的平方值，然后按需要取平方值的中间几位作为哈希地址。这是因为：平方后中间几位和关键字中每一位都相关，故不同关键字会以较高的概率产生不同的哈希地址。</p>
+<p>如果数值分配比较均匀的话这种方法能得到不错的结果，但我上面画的那个图的各个元素的值算出来的index都是0——非常失败。还有个问题，value如果很大，value * value不会溢出吗？答案是会的，但我们这个乘法不关心溢出，因为我们根本不是为了获取相乘结果，而是为了获取下标。</p>
+<h3 id="斐波那契散列法"><a href="#斐波那契散列法" class="headerlink" title="斐波那契散列法"></a>斐波那契散列法</h3><p>公式:</p>
+<blockquote>
+<p><code>index = (value * num) &gt;&gt; 28</code>（此处的num为特定的乘数，其余与平方散列法相同）</p>
+</blockquote>
+<p>在上述“平方散列法”中，需要以 value 的值作为乘数，有没有可能用特定的数值作为乘数。</p>
+<ul>
+<li>对于16位整数而言，这个乘数是<code>40503</code>。</li>
+<li>对于32位整数而言，这个乘数是<code>2654435769</code>。</li>
+<li>对于64位整数而言，这个乘数是<code>11400714819323198485</code>.</li>
+</ul>
+<h2 id="哈希冲突"><a href="#哈希冲突" class="headerlink" title="哈希冲突"></a>哈希冲突</h2><p>哈希重复，也就是两个不同输入通过哈希函数运算所得到的地址值相同的情况。哈希冲突是无法避免的，因此，哈希算法的选择直接决定了哈希冲突发送的概率；同时必须要对哈希冲突进行处理。</p>
+<h3 id="开放寻址法"><a href="#开放寻址法" class="headerlink" title="开放寻址法"></a>开放寻址法</h3><blockquote>
+<p>开放寻址法，即把所有的元素都存放在散列表中，也就是每个表项包含动态集合的一个元素（元素可以为NULL）。</p>
+</blockquote>
+<ol>
+<li>在开放寻址法中，当要插入一个元素时，可以连续地检查散列表的各个项（连续检查是可以通过不同的算法获得偏移位），直到找到一个空槽来放置这个元素为止。</li>
+<li>当查找一个元素时，要检查所有的表项，直到找到所需的元素，或者最终发现元素不在表中。</li>
+<li>在开放寻址法中，对散列表元素的删除操作执行起来比较困难。当我们从槽 i 中删除关键字时，不能仅将此位置元素置空。因为这样做的话，会导致在无法判断此位置是否有元素。应该用个特殊的值表示该元素已经删除。</li>
+</ol>
+<p>公式:</p>
+<blockquote>
+<p><code>Hi=(H(key) + di) % m</code> , [ i &#x3D; 1, 2，…，k * (k &lt;&#x3D; m-1) ]</p>
+</blockquote>
+<p>其中<code>H(key)</code>为散列函数，<code>m</code>为散列表长；<code>di</code>为增量序列，可有下列三种取法:</p>
+<h3 id="线性探测再散列"><a href="#线性探测再散列" class="headerlink" title="线性探测再散列"></a>线性探测再散列</h3><p>公式：<code>di = 1,2,3，…，m-1</code><br>线性再散列法是最简单的处理冲突的方案。插入数据时，当发生冲突，算法会自动从该空间的位置向后遍历哈希表，直到找到下一个空间为空的位置。（这样会导致相同hash的数据重复存放，且会占用其他hash所对应的空间。）查询数据时，算法会先定位到该hash所对应的位置空间上，若是没找到匹配数据则会从该位置继续向后遍历哈希表，直到找到：</p>
+<ul>
+<li>对应的数据，返回对应数据。</li>
+<li>空的空间，并返回所对应的值为空。</li>
+<li>遍历结束也未出现上两种情况，返回未找到，并表示该哈希表是满的。</li>
+</ul>
+<h4 id="线性探测法处理冲突的但存在下列缺点："><a href="#线性探测法处理冲突的但存在下列缺点：" class="headerlink" title="线性探测法处理冲突的但存在下列缺点："></a>线性探测法处理冲突的但存在下列缺点：</h4><ul>
+<li>处理溢出需另编程序。一般可另外设立一个溢出表，专门用来存放上述哈希表中放不下的记录。此溢出表最简单的结构是顺序表，查找方法可用顺序查找。</li>
+<li>按上述算法建立起来的哈希表，删除工作非常困难。如果将此元素删除，查找的时会发现空槽，则会认为要找的元素不存在。只能标上已被删除的标记，否则，将会影响以后的查找。</li>
+<li>线性探测法很容易产生堆聚现象。所谓堆聚现象，就是存入哈希表的记录在表中连成一片。按照线性探测法处理冲突，如果生成哈希地址的连续序列愈长 ( 即不同关键字值的哈希地址相邻在一起愈长 ) ，则当新的记录加入该表时，与这个序列发生冲突的可能性愈大。因此，哈希地址的较长连续序列比较短连续序列生长得快，这就意味着，一旦出现堆聚 ( 伴随着冲突 ) ，就将引起进一步的堆聚。</li>
+</ul>
+<h3 id="二次探测再散列"><a href="#二次探测再散列" class="headerlink" title="二次探测再散列"></a>二次探测再散列</h3><p>公式：<code>di = 1^2, -1^2, 2^2, -2^2, 3^2，…，±(k)^2, (k &lt;= m/2) </code></p>
+<h3 id="伪随机探测再散列"><a href="#伪随机探测再散列" class="headerlink" title="伪随机探测再散列"></a>伪随机探测再散列</h3><p>公式：<code>di = pseudo-random</code></p>
+<p>随机探测的基本思想是：将线性探测的步长从常数改为随机数，即令： hash ＝ (hash ＋ RN) % m ，其中 RN 是一个随机数。在实际程序中应预先用随机数发生器产生一个随机序列，将此序列作为依次探测的步长。这样就能使不同的关键字具有不同的探测次序，从而可以避 免或减少堆聚。基于与线性探测法相同的理由，在线性补偿探测法和随机探测法中，删除一个记录后也要打上删除标记。</p>
+<h3 id="拉链法"><a href="#拉链法" class="headerlink" title="拉链法"></a>拉链法</h3><p>最常见的实现方案如下，可称之为“数组链表法”。数组的特点是：寻址容易，插入和删除困难；而链表的特点是：寻址困难，插入和删除容易。结合两者的特性的数据结构便是寻址，插入删除代价都相对均衡的哈希表。其中大致结构如下：</p>
+<p><img src="https://i.imgur.com/1rUEkhv.jpg" alt="Entry数组实现哈希表"></p>
+<p>从上图的结构中可以看出，左边的连续存储结构为数组，而数组的每个空间都存放一个指向链表头部的指针。需要按元素的特征将数据分配到不同的链表中去。而将元素特征转换为数组下标的方法就是“散列法”。（例如 Java中的 HashTable、HashMap 都是使用“拉链法”实现）。</p>
+<h4 id="拉链法的优点："><a href="#拉链法的优点：" class="headerlink" title="拉链法的优点："></a>拉链法的优点：</h4><ul>
+<li>拉链法处理冲突简单，且无堆积现象，即非同义词决不会发生冲突，因此平均查找长度较短；</li>
+<li>由于拉链法中各链表上的结点空间是动态申请的，故它更适合于造表前无法确定表长的情况；</li>
+<li>开放定址法为减少冲突，要求装填因子α较小，故当结点规模较大时会浪费很多空间。而拉链法中可取α≥1，且结点较大时，拉链法中增加的指针域可忽略不计，因此节省空间；</li>
+<li>在用拉链法构造的散列表中，删除结点的操作易于实现。只要简单地删去链表上相应的结点即可。</li>
+</ul>
+<h4 id="拉链法的缺点"><a href="#拉链法的缺点" class="headerlink" title="拉链法的缺点"></a>拉链法的缺点</h4><p>指针需要额外的空间，故当结点规模较小时，开放定址法较为节省空间，而若将节省的指针空间用来扩大散列表的规模，可使装填因子变小，这又减少了开放定址法中的冲突，从而提高平均查找速度。</p>
+<blockquote>
+<p>本篇文章是写于 2017.08.07 的学习笔记，那时正是酷暑，稍稍坐一会就汗流浃背。别家空调压缩机排出的热气通过门下的缝隙灌入我的房间，使我的室温甚至高于窗外艳阳下的温度，挥汗写下这篇学习笔记。正因如此，我也知道肯定错误百出，望大家多加指正。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/%E5%93%88%E5%B8%8C/" rel="tag"># 哈希</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/08/07/analysis-of-HashMap-and-HashTable-based-on-JDK1-7/" rel="next" title="基于 JDK1.7 分析 HashMap 与 HashTable 源码实现">
+                  基于 JDK1.7 分析 HashMap 与 HashTable 源码实现 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">懂同学</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"MMcqWJy3sJ5y8W7JI8qoH1G1-gzGzoHsz","app_key":"9SoVbiw1buHEL089ydbRt9ug","server_url":"https://mangococo.github.io","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-m.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/m_32_32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/m_16_16.png">
+  <link rel="mask-icon" href="/images/apple-touch-icon-m.png" color="#222">
+  <meta name="google-site-verification" content="7biOwoseRGn9zLZjqZVvrNadToAGciN5bHtcREVehPI">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mangococo.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="习得技与才，立于天地间">
+<meta property="og:type" content="website">
+<meta property="og:title" content="芒枸公社">
+<meta property="og:url" content="https://mangococo.github.io/page/2/index.html">
+<meta property="og:site_name" content="芒枸公社">
+<meta property="og:description" content="习得技与才，立于天地间">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="懂同学">
+<meta property="article:tag" content="日志,技术笔记,Java,Linux">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mangococo.github.io/page/2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"page/2/index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>芒枸公社</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">芒枸公社</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">懂同学的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="懂同学"
+      src="/images/mm.png">
+  <p class="site-author-name" itemprop="name">懂同学</p>
+  <div class="site-description" itemprop="description">习得技与才，立于天地间</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/mangococo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mangococo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:blackocean1127@gmail.com" title="E-Mail → mailto:blackocean1127@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/mangococo" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;mangococo" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://mangococo.github.io/2018/11/23/spring-boot-deal-bad-request/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mm.png">
+      <meta itemprop="name" content="懂同学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="芒枸公社">
+      <meta itemprop="description" content="习得技与才，立于天地间">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 芒枸公社">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/11/23/spring-boot-deal-bad-request/" class="post-title-link" itemprop="url">Spring Boot 对错误请求的处理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-11-23 08:11:28" itemprop="dateCreated datePublished" datetime="2018-11-23T08:11:28+08:00">2018-11-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2018/11/23/spring-boot-deal-bad-request/" class="post-meta-item leancloud_visitors" data-flag-title="Spring Boot 对错误请求的处理" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="spring-boot-的默认处理"><a href="#spring-boot-的默认处理" class="headerlink" title="spring boot 的默认处理"></a>spring boot 的默认处理</h2><h3 id="spring-boot-未进入到Controller中的错误请求处理："><a href="#spring-boot-未进入到Controller中的错误请求处理：" class="headerlink" title="spring boot 未进入到Controller中的错误请求处理："></a>spring boot 未进入到<code>Controller</code>中的错误请求处理：</h3><p>spring boot 对于数据校验错误的请求处理：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">请求： PUT <span class="string">&quot;/user/1&quot;</span></span><br><span class="line">测试数据：<span class="punctuation">&#123;</span> <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="number">1</span><span class="punctuation">,</span> <span class="attr">&quot;username&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;@jincoco&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;password&quot;</span><span class="punctuation">:</span> <span class="string">&quot;123456&quot;</span><span class="punctuation">,</span>  <span class="attr">&quot;email&quot;</span><span class="punctuation">:</span> <span class="string">&quot;jincoco@email.com&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;birthday&quot;</span><span class="punctuation">:</span> <span class="number">1542700692000</span> <span class="punctuation">&#125;</span></span><br><span class="line">校验约束：username 字段必须是数字、字母或_的组合</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2018/11/21/5bf50a41c2e4b.jpg"></p>
+<p>由于测试错误为字段校验，需要上传数据，此处为<code>PUT</code>请求，尽模拟 APP 发送请求。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/23/spring-boot-deal-bad-request/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://mangococo.github.io/2018/11/20/custom-validator-logic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mm.png">
+      <meta itemprop="name" content="懂同学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="芒枸公社">
+      <meta itemprop="description" content="习得技与才，立于天地间">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 芒枸公社">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/11/20/custom-validator-logic/" class="post-title-link" itemprop="url">Hibernate Validator 校验 （二）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-11-20 20:18:26" itemprop="dateCreated datePublished" datetime="2018-11-20T20:18:26+08:00">2018-11-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2018/11/20/custom-validator-logic/" class="post-meta-item leancloud_visitors" data-flag-title="Hibernate Validator 校验 （二）" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在<a target="_blank" rel="noopener" href="https://www.dongdongdong.work/2018/11/hibernate-validator_5.html">Hibernate Validator 校验 （一）</a>中，谈了如何利用 Hibernate Validator 提供的约束注解完成较为简单的对象校验，但这也不能满足开发的需求。这时，我们需要自己实现校验逻辑。</p>
+<h2 id="自定义校验逻辑"><a href="#自定义校验逻辑" class="headerlink" title="自定义校验逻辑"></a>自定义校验逻辑</h2><p>自实现校验有很多优点，一个项目下，肯定存在多个服务对同一类型的实例操作，而其校验逻辑大多类似。通过自实现校验将该逻辑抽象出来，一方面减少代码重复，又可以满足当下模块开发的思想。</p>
+<p>先来看看测试类与 Controller 层实现，其实与上一篇中的实现无太大差别，只是此次我们将使用正则表达式校验<code>username</code>，规则是<code>匹配任何字类字符，包括下划线</code>，因此此处我们模拟发起增添用户的<code>POST</code>请求。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/20/custom-validator-logic/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://mangococo.github.io/2018/11/19/simple-hibernate-validation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mm.png">
+      <meta itemprop="name" content="懂同学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="芒枸公社">
+      <meta itemprop="description" content="习得技与才，立于天地间">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 芒枸公社">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/11/19/simple-hibernate-validation/" class="post-title-link" itemprop="url">Hibernate Validator 校验（一）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-11-19 23:39:03" itemprop="dateCreated datePublished" datetime="2018-11-19T23:39:03+08:00">2018-11-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2018/11/19/simple-hibernate-validation/" class="post-meta-item leancloud_visitors" data-flag-title="Hibernate Validator 校验（一）" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="简单校验"><a href="#简单校验" class="headerlink" title="简单校验"></a>简单校验</h2><p>Validator 规范对约束的定义包括两部分，一是约束注解， <code>@NotBlank</code> 就是约束注解；二是约束校验器，每一个约束注解都存在对应的约束校验器，约束校验器用来校验具体的对象是否满足该约束注解声明的条件。</p>
+<h3 id="声明需要校验的字段"><a href="#声明需要校验的字段" class="headerlink" title="声明需要校验的字段"></a>声明需要校验的字段</h3><p>以<code>User</code>实体为例，其中<code>username</code>字段使用注解：<code>@NotBlank</code>，该注解声明<code>username</code>字段不能为空（虽该注解也要求字段不能为<code>null</code>，但与<code>@NotNull</code>有本质区别，后面会列举常见校验注解的区别）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotBlank</span></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/19/simple-hibernate-validation/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://mangococo.github.io/2018/11/12/spring-boot-2-x-Serialize-Date-object-to-timestamp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mm.png">
+      <meta itemprop="name" content="懂同学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="芒枸公社">
+      <meta itemprop="description" content="习得技与才，立于天地间">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 芒枸公社">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/11/12/spring-boot-2-x-Serialize-Date-object-to-timestamp/" class="post-title-link" itemprop="url">Spring boot 2.x不再默认将 java.util.Date 序列化为 timestamp（时间戳）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-11-12 20:54:16" itemprop="dateCreated datePublished" datetime="2018-11-12T20:54:16+08:00">2018-11-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2018/11/12/spring-boot-2-x-Serialize-Date-object-to-timestamp/" class="post-meta-item leancloud_visitors" data-flag-title="Spring boot 2.x不再默认将 java.util.Date 序列化为 timestamp（时间戳）" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在当下的前后端分离的开发环境下，对于传输时间数据的格式众说纷纭，但我仍然认为传递时间戳<code>timestamp</code>更合理，这样后端程序勿需关注前端时间的表现形式，更能应对一对多（同一后端代码，拥有多个前端）的需求。</p>
+<p>在<code>spring boot 1</code>时，被<code>@ResponseBody</code>修饰的返回值中如果存在<code>java.util.Date</code>类型，<code>jackson</code>会默认被序列化为<code>timestamp</code>（一个数字串）的形式。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/hello&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Model <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Model</span>(<span class="number">1</span>, <span class="keyword">new</span> <span class="title class_">Date</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>以上述代码为例，在 <code>spring boot 2</code>后，不再默认序列化，而是格式化为下图格式：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/12/spring-boot-2-x-Serialize-Date-object-to-timestamp/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+    
+    <div class="post-gallery-image">
+      <img src="https://i.loli.net/2018/11/11/5be7d6496ba46.jpg" itemprop="contentUrl">
+    </div>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://mangococo.github.io/2018/09/05/install-oracle-jdk-on-ubuntu-server/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mm.png">
+      <meta itemprop="name" content="懂同学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="芒枸公社">
+      <meta itemprop="description" content="习得技与才，立于天地间">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 芒枸公社">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/09/05/install-oracle-jdk-on-ubuntu-server/" class="post-title-link" itemprop="url">在 Ubuntu Server 18.04 LTS 安装oracle Java JDK</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-09-05 21:01:40" itemprop="dateCreated datePublished" datetime="2018-09-05T21:01:40+08:00">2018-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%88%B1%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">爱折腾</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%88%B1%E6%8A%98%E8%85%BE/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" itemprop="url" rel="index"><span itemprop="name">软件安装</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2018/09/05/install-oracle-jdk-on-ubuntu-server/" class="post-meta-item leancloud_visitors" data-flag-title="在 Ubuntu Server 18.04 LTS 安装oracle Java JDK" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>第一步，移除默认<code>open-jdk</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get autoremove openjdk-11-jre-headless</span><br></pre></td></tr></table></figure>
+
+<h2 id="apt-get安装"><a href="#apt-get安装" class="headerlink" title="apt-get安装"></a><code>apt-get</code>安装</h2><p>1、安装依赖包：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-software-properties</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/09/05/install-oracle-jdk-on-ubuntu-server/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://mangococo.github.io/2018/08/11/heap-sort/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mm.png">
+      <meta itemprop="name" content="懂同学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="芒枸公社">
+      <meta itemprop="description" content="习得技与才，立于天地间">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 芒枸公社">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/08/11/heap-sort/" class="post-title-link" itemprop="url">堆排序</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-08-11 18:22:50" itemprop="dateCreated datePublished" datetime="2018-08-11T18:22:50+08:00">2018-08-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/" itemprop="url" rel="index"><span itemprop="name">排序</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2018/08/11/heap-sort/" class="post-meta-item leancloud_visitors" data-flag-title="堆排序" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="一些基础知识"><a href="#一些基础知识" class="headerlink" title="一些基础知识"></a>一些基础知识</h2><p>学习堆排序，总要了解<em>堆</em>的数据结构吧，了解堆又需要了解<em>二叉树</em>的基本知识，了解二叉树要先知道树是个什么东西吧……<img src="https://i.loli.net/2018/05/02/5ae98bd2f1b7b.png" style="width:30px; display:inline !important"/>呃，还是太年轻。这里简单谈谈吧。</p>
+<h3 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h3><ol>
+<li>提一下<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A0%91_(%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)"><strong>树</strong></a>——<strong>树</strong>是一对多的数据结构，从一个根结点开始，生长出它的子结点，而每一个子结点又生长出各自的子结点，成为<strong>子树</strong>。如果某个结点不再生长出子结点了，它就成为<strong>叶子</strong>。 <img src="https://i.loli.net/2018/05/03/5aea73f5ef3ef.jpg" alt="一个普通的树结构"></li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/08/11/heap-sort/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://mangococo.github.io/2018/07/23/config-static-network-on-ubuntu-server/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mm.png">
+      <meta itemprop="name" content="懂同学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="芒枸公社">
+      <meta itemprop="description" content="习得技与才，立于天地间">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 芒枸公社">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/07/23/config-static-network-on-ubuntu-server/" class="post-title-link" itemprop="url">Ubuntu Server 18.04 网络设置</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-07-23 12:58:10" itemprop="dateCreated datePublished" datetime="2018-07-23T12:58:10+08:00">2018-07-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%88%B1%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">爱折腾</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%88%B1%E6%8A%98%E8%85%BE/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">系统设置</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2018/07/23/config-static-network-on-ubuntu-server/" class="post-meta-item leancloud_visitors" data-flag-title="Ubuntu Server 18.04 网络设置" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如何为 ubuntu server 18.04 配置静态 IP 呢？</p>
+<p><img src="https://i.imgur.com/S2DlmxJ.jpg"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/07/23/config-static-network-on-ubuntu-server/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">懂同学</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"MMcqWJy3sJ5y8W7JI8qoH1G1-gzGzoHsz","app_key":"9SoVbiw1buHEL089ydbRt9ug","server_url":"https://mangococo.github.io","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-m.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/m_32_32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/m_16_16.png">
+  <link rel="mask-icon" href="/images/apple-touch-icon-m.png" color="#222">
+  <meta name="google-site-verification" content="7biOwoseRGn9zLZjqZVvrNadToAGciN5bHtcREVehPI">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mangococo.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="使用授权方法进行授权配置每一个 Spring Security 控制授权表达式（以下简称为表达式）实际上都在 API 中对应一个授权方法，该方法是请求的 URL 权限配置时的处理方法。例如： 123456789@Overrideprotected void configure(HttpSecurity http) throws Exception &#123;    http.authorizeR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Security 控制授权">
+<meta property="og:url" content="https://mangococo.github.io/2018/02/26/spring-security-rbac-authentication/index.html">
+<meta property="og:site_name" content="芒枸公社">
+<meta property="og:description" content="使用授权方法进行授权配置每一个 Spring Security 控制授权表达式（以下简称为表达式）实际上都在 API 中对应一个授权方法，该方法是请求的 URL 权限配置时的处理方法。例如： 123456789@Overrideprotected void configure(HttpSecurity http) throws Exception &#123;    http.authorizeR">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2018/08/01/5b61a3994aa1e.jpg">
+<meta property="article:published_time" content="2018-02-26T12:29:45.000Z">
+<meta property="article:modified_time" content="2024-03-02T10:19:19.742Z">
+<meta property="article:author" content="懂同学">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="spring">
+<meta property="article:tag" content="spring security">
+<meta property="article:tag" content="rbac">
+<meta property="article:tag" content="数据库设计">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2018/08/01/5b61a3994aa1e.jpg">
+
+
+<link rel="canonical" href="https://mangococo.github.io/2018/02/26/spring-security-rbac-authentication/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mangococo.github.io/2018/02/26/spring-security-rbac-authentication/","path":"2018/02/26/spring-security-rbac-authentication/","title":"Spring Security 控制授权"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Spring Security 控制授权 | 芒枸公社</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">芒枸公社</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">懂同学的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%8E%88%E6%9D%83%E6%96%B9%E6%B3%95%E8%BF%9B%E8%A1%8C%E6%8E%88%E6%9D%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">使用授权方法进行授权配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%8E%88%E6%9D%83%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%BB%99%E5%A4%9A%E6%9D%83%E9%99%90%E8%A6%81%E6%B1%82%E7%9A%84%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83"><span class="nav-number">1.1.</span> <span class="nav-text">使用授权表达式给多权限要求的请求授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%88%E6%9D%83%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E"><span class="nav-number">1.2.</span> <span class="nav-text">授权表达式举例说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%88%E6%9D%83%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E8%A1%8C%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text">使用自定义授权表达式进行访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E8%A7%92%E8%89%B2%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6-RBAC-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%EF%BC%88Role-Based-Access-Control%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">基于角色的访问控制 RBAC 数据模型（Role-Based Access Control）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E8%A1%A8"><span class="nav-number">2.1.1.</span> <span class="nav-text">用户表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%92%E8%89%B2%E8%A1%A8"><span class="nav-number">2.1.2.</span> <span class="nav-text">角色表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E8%A1%A8"><span class="nav-number">2.1.3.</span> <span class="nav-text">资源表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E2%80%94%E8%A7%92%E8%89%B2%E5%85%B3%E7%B3%BB%E8%A1%A8"><span class="nav-number">2.1.4.</span> <span class="nav-text">用户—角色关系表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%92%E8%89%B2%E2%80%94%E8%B5%84%E6%BA%90%E5%85%B3%E7%B3%BB%E8%A1%A8"><span class="nav-number">2.1.5.</span> <span class="nav-text">角色—资源关系表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%88%E6%9D%83%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">自定义授权表达式</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="懂同学"
+      src="/images/mm.png">
+  <p class="site-author-name" itemprop="name">懂同学</p>
+  <div class="site-description" itemprop="description">习得技与才，立于天地间</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/mangococo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mangococo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:blackocean1127@gmail.com" title="E-Mail → mailto:blackocean1127@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/mangococo" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;mangococo" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mangococo.github.io/2018/02/26/spring-security-rbac-authentication/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mm.png">
+      <meta itemprop="name" content="懂同学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="芒枸公社">
+      <meta itemprop="description" content="习得技与才，立于天地间">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Spring Security 控制授权 | 芒枸公社">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring Security 控制授权
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-02-26 20:29:45" itemprop="dateCreated datePublished" datetime="2018-02-26T20:29:45+08:00">2018-02-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2018/02/26/spring-security-rbac-authentication/" class="post-meta-item leancloud_visitors" data-flag-title="Spring Security 控制授权" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="使用授权方法进行授权配置"><a href="#使用授权方法进行授权配置" class="headerlink" title="使用授权方法进行授权配置"></a>使用授权方法进行授权配置</h2><p>每一个 Spring Security 控制授权表达式（以下简称为表达式）实际上都在 API 中对应一个授权方法，该方法是请求的 URL 权限配置时的处理方法。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    http.authorizeRequests()</span><br><span class="line">        .antMatchers(HttpMethod.DELETE, <span class="string">&quot;/user/*&quot;</span>).hasRole(<span class="string">&quot;ADMIN&quot;</span>)</span><br><span class="line">        .antMatchers(<span class="string">&quot;/index&quot;</span>).permitAll()</span><br><span class="line">        .antMatchers(<span class="string">&quot;/pay&quot;</span>).hasAnyRole(<span class="string">&quot;WE_CHAT_PAY&quot;</span>, <span class="string">&quot;ALI_PAY&quot;</span>)</span><br><span class="line">        .antMatchers(<span class="string">&quot;/debug&quot;</span>).hasIpAddress(<span class="string">&quot;192.168.1.0/24&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h3 id="使用授权表达式给多权限要求的请求授权"><a href="#使用授权表达式给多权限要求的请求授权" class="headerlink" title="使用授权表达式给多权限要求的请求授权"></a>使用授权表达式给多权限要求的请求授权</h3><p>那么，何时需要用到表达式进行授权处理呢？一个安全应用的权限要求往往是复杂多样的，比如，项目的调试请求希望访问者既要拥有管理员权限又必须是通过公司内部局域网内部访问。而这样的需求下，仅仅通过Security API 提供的方法是无法满足的，因为这些授权方法是无法连续调用的。</p>
+<p>此时就可以使用授权表达式解决：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    http.authorizeRequests()</span><br><span class="line">        .antMatchers(<span class="string">&quot;/debug&quot;</span>)</span><br><span class="line">            .access(<span class="string">&quot;hasRole(&#x27;ADMIN&#x27;) and hasIpAddress(&#x27;192.168.1.0/24&#x27;)&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="授权表达式举例说明"><a href="#授权表达式举例说明" class="headerlink" title="授权表达式举例说明"></a>授权表达式举例说明</h3><table>
+<thead>
+<tr>
+<th align="center">表达式</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>permitAll</code></td>
+<td align="center">永远返回 true</td>
+</tr>
+<tr>
+<td align="center"><code>denyAll</code></td>
+<td align="center">永远返回 false</td>
+</tr>
+<tr>
+<td align="center"><code>anonyous</code></td>
+<td align="center">当前用户若是匿名用户返回 true</td>
+</tr>
+<tr>
+<td align="center"><code>rememberMe</code></td>
+<td align="center">当前用户若是 rememberMe 用户返回 true</td>
+</tr>
+<tr>
+<td align="center"><code>authenticated</code></td>
+<td align="center">当前用户若不是匿名（已认证）用户返回 true</td>
+</tr>
+<tr>
+<td align="center"><code>fullAuthenticated</code></td>
+<td align="center">当前用户若既不是匿名用户又不是 rememberMe 用户时返回 true</td>
+</tr>
+<tr>
+<td align="center"><code>hasRole(role)</code></td>
+<td align="center">当前用户权限集合中若拥有指定的 role 角色权限（匹配时会在你所指定的权限前加’ROLE_’，即判断是否有“ROLE_role”权限）时返回 true</td>
+</tr>
+<tr>
+<td align="center"><code>hasAnyRole(role1, role2, ...)</code></td>
+<td align="center">当前用户权限集合中若拥有任意一个角色权限时返回 true</td>
+</tr>
+<tr>
+<td align="center"><code>hasAuthority(authority)</code></td>
+<td align="center">当前用户权限集合中若具有 authority 权限（匹配是否有“authority”权限）时返回 true</td>
+</tr>
+<tr>
+<td align="center"><code>hasAnyAuthority(authority)</code></td>
+<td align="center">当前用户权限集合中若拥有任意一个权限时返回 true</td>
+</tr>
+<tr>
+<td align="center"><code>hasIpAddress(&quot;192.168.1.0/24&quot;)</code></td>
+<td align="center">发送请求的IP匹配时fanhui true</td>
+</tr>
+</tbody></table>
+<h2 id="使用自定义授权表达式进行访问控制"><a href="#使用自定义授权表达式进行访问控制" class="headerlink" title="使用自定义授权表达式进行访问控制"></a>使用自定义授权表达式进行访问控制</h2><p>或许你会认为上述方式已能满足绝大多数应用安全授权管理。但事实上的企业级应用的授权往往是基于数据库数据动态变化的，若是使用上述方式进行字符串拼接，不仅对于开发者极不友好（每一次人人员变动都意味着需要改代码，显然不合理），而且应用的性能也会随之降低。那么，如何解决呢？</p>
+<p>基本思想是自定义授权管理模块（从数据库中插查询用户角色权限及可以访问的资源），并利用自定义授权表达式进行授权管理。此处的数据结构基于RBAC数据模型构建</p>
+<h3 id="基于角色的访问控制-RBAC-数据模型（Role-Based-Access-Control）"><a href="#基于角色的访问控制-RBAC-数据模型（Role-Based-Access-Control）" class="headerlink" title="基于角色的访问控制 RBAC 数据模型（Role-Based Access Control）"></a>基于角色的访问控制 RBAC 数据模型（Role-Based Access Control）</h3><p>通用的 RBAC 数据模型， 一般需要五张表（三张实体表，两张关系表）。三张实体表包括用户表、角色表、资源表。两张关系表包括。其之间关系如下图：</p>
+<p><img src="https://i.loli.net/2018/08/01/5b61a3994aa1e.jpg" alt="RBAC数据模型"></p>
+<h4 id="用户表"><a href="#用户表" class="headerlink" title="用户表"></a>用户表</h4><p>任何一个系统都必须要有用户表，当公司发生人员变动时，由业务人员（如人力资源）对该数据表进行增删记录。</p>
+<h4 id="角色表"><a href="#角色表" class="headerlink" title="角色表"></a>角色表</h4><p>公司有哪些身份的人，例如总裁、副总裁、部门经理等，由业务人员根据公司的具体情况对该表数据进行操作。</p>
+<h4 id="资源表"><a href="#资源表" class="headerlink" title="资源表"></a>资源表</h4><p>存储需要进行权限控制的资源，由于我们进行控制授权时实际上是基于 URL 的，但业务人员并非按 URL 组织数据条目（事实上大多数业务人员也不懂这些），而是以视图界面的形式进行操作。所以在这张表中存储的是呈现给业务人员的菜单、按钮及其所进行权限控制的 URL 。</p>
+<h4 id="用户—角色关系表"><a href="#用户—角色关系表" class="headerlink" title="用户—角色关系表"></a>用户—角色关系表</h4><p>用户表与角色表（用户 id 与角色id ）之间是一个多对多的关系。一个用户可以是多个角色（一个用户既可以是部门经理又可以是某个管理员），而一个角色往往对应多个用户。</p>
+<h4 id="角色—资源关系表"><a href="#角色—资源关系表" class="headerlink" title="角色—资源关系表"></a>角色—资源关系表</h4><p>角色表与资源表（）也是一个多对多的关系。一种角色可以访问多个资源（按钮或菜单等），一个资源也可以被多个角色访问。</p>
+<h3 id="自定义授权表达式"><a href="#自定义授权表达式" class="headerlink" title="自定义授权表达式"></a>自定义授权表达式</h3><p>spring security 支持自定义表达式来完成这项工作，下面是一个简单的例子：</p>
+<p>首先定义自己的授权模块并声明为 Spring 的 Bean<br> 如下，此处方法名可以任意，但参数必须提供<code>HttpServletRequest</code>及<code>Authentication</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RbacService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">AntPathMatcher</span> <span class="variable">antPathMatcher</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AntPathMatcher</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasPermission</span><span class="params">(HttpServletRequest request, Authentication auth)</span> &#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="type">boolean</span>[] hasPermission = &#123;<span class="literal">false</span>&#125;;</span><br><span class="line">            <span class="type">Object</span> <span class="variable">principal</span> <span class="operator">=</span> auth.getPrincipal();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 只有对非匿名用户才有必要进行权限控制</span></span><br><span class="line">            <span class="keyword">if</span> (principal <span class="keyword">instanceof</span> UserDetails) &#123;</span><br><span class="line">                <span class="type">String</span> <span class="variable">username</span> <span class="operator">=</span> (UserDetails) principal.getUsername();</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 根据username 查询用户所拥有权限的所有URL</span></span><br><span class="line">                Set&lt;String&gt; urls = getUrlsByUsername(username);</span><br><span class="line">                <span class="comment">// 遍历判断用户所访问的请求是否在其权限允许的范围内</span></span><br><span class="line">                urls.forEach(url -&gt; &#123;</span><br><span class="line">                    <span class="keyword">if</span> (antPathMatcher.match(url, request.getRequestURI())) &#123;</span><br><span class="line">                        hasPermission[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> hasPermission[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在 Spring Security 安全配置中使用自定义授权表达式添加自己的授权逻辑：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    http.authorizeRequests()</span><br><span class="line">        .anyRequest()</span><br><span class="line">            .access(<span class="string">&quot;@rbacService.hasPermission(request, authentication)&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Okay,这样一来，就可以将自己的授权逻辑与 Spring Security 模块衔接起来了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/spring/" rel="tag"># spring</a>
+              <a href="/tags/spring-security/" rel="tag"># spring security</a>
+              <a href="/tags/rbac/" rel="tag"># rbac</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/" rel="tag"># 数据库设计</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/01/29/solution-for-generating-circular-dependencies-when-spring-Beans-is-injected/" rel="prev" title="Spring Bean 循环依赖解决方案">
+                  <i class="fa fa-angle-left"></i> Spring Bean 循环依赖解决方案
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/07/23/config-static-network-on-ubuntu-server/" rel="next" title="Ubuntu Server 18.04 网络设置">
+                  Ubuntu Server 18.04 网络设置 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">懂同学</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"MMcqWJy3sJ5y8W7JI8qoH1G1-gzGzoHsz","app_key":"9SoVbiw1buHEL089ydbRt9ug","server_url":"https://mangococo.github.io","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>
